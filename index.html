@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="css/main.css"
+    />
+  </head>
+
+  <body onload="onInit()">
+    <section class="gallery">
+      <h1>The Gallery</h1>
+      <h2>Choose a picture</h2>
+      <div class="inputs">
+        <input
+          type="file"
+          class="file-input btn"
+          name="image"
+          onchange="onImgInput(event)"
+        />
+      </div>
+
+      <section class="img-container">
+        <img
+          id="donald-trump"
+          src="img/1.jpg"
+          alt="Donald Trump"
+          onclick="drawImgFromlocal('1')"
+        />
+        <img
+          id="puppies"
+          src="img/2.jpg"
+          alt="Puppies"
+          onclick="drawImgFromlocal('2')"
+        />
+        <img
+          id="a-baby-and-a-puppy"
+          src="img/3.jpg"
+          alt="A baby and a puppy"
+          onclick="drawImgFromlocal('3')"
+        />
+      </section>
+    </section>
+
+    <section class="editor">
+      <h1>The Editor</h1>
+      <button
+        class="backGalleryBtn"
+        onclick="onBackGallery()"
+      >
+        To the gallery
+      </button>
+      <div class="upload">
+        <button
+          class="btn"
+          onclick="onUploadImg()"
+        >
+          Upload Image from Canvas
+        </button>
+
+        <a
+          href="#"
+          class="btn"
+          onclick="downloadImg(this)"
+          download="my-img.jpg"
+          >Download as jpeg</a
+        >
+      </div>
+
+      <div class="canvas-container">
+        <canvas
+          id="my-canvas"
+          width="400"
+          height="400"
+          style="outline: 1px solid blue"
+        ></canvas>
+      </div>
+    </section>
+
+    <script src="js/service.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/upload-from-local.js"></script>
+    <script src="js/sharing-on-facebook.js"></script>
+  </body>
+</html>
