@@ -32,7 +32,6 @@ function renderCanvas() {
   //Clear the canvas,  fill it with grey background
   gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
   // renderCircle()
-  // renderCircle()
 }
 
 // function drawImgFromlocal(id) {
