@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  text-align: center;
+  background-color: white;
+}
+
+.header {
+  height: 20vh;
+
+  background-color: blue;
+}
+
+button {
+  margin-block-start: 20px;
+  padding-inline: 7px;
+
+  border-radius: 20px;
+}
+
+.container {
+  width: 100vw;
+
+  border: 5px solid blue;
+}
+
+.gallery-container .imgs-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-flow: dense;
+  padding: 60px;
+  gap: 5px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+/* img:nth-child(4n) {
+  grid-row: span 2;
+  grid-column: span 2;
+} */
+
+.meme-editor-container {
+  height: 60vh;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  background-color: lightpink;
+  border: 5px solid black;
+
+  cursor: crosshair;
+}
+
+.control-panel {
+  width: 50vw;
+  height: 10vh;
+
+  border: 5px solid black;
+}
+
+.memes-container {
+  height: 30vh;
+}
+
+.about-container {
+  height: 30vh;
+}
+
+/* HELPERS */
+
+.grid {
+  display: grid;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="ie=edge"
+    />
+    <link
+      rel="stylesheet"
+      href="css/style.css"
+    />
+    <link
+      rel="stylesheet"
+      href="css/mq.css"
+    />
+    <title>Meme Generator</title>
+  </head>
+
+  <body onload="init()">
+    <header class="header flex">
+      <div class="logo">
+        <button class="logo-hdr-btn">LOGO</button>
+      </div>
+
+      <div class="header-btns">
+        <button class="gallery-hdr-btn">Gallery</button>
+        <button class="meme-editor-hdr-btn">Meme-editor</button>
+        <button class="memes-hdr-btn">Memes</button>
+        <button class="about-hdr-btn">About</button>
+      </div>
+    </header>
+
+    <h1 class="page-title">Page Title</h1>
+
+    <section class="container gallery-container">
+      <div class="search-panel">
+        <h2>"search-panel" To Be Continue...</h2>
+      </div>
+      <main class="imgs-container grid">
+        <img
+          src="imgs/1.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/2.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/3.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/4.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/5.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/6.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/7.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/8.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/9.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/10.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/11.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/12.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/13.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/14.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/15.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/16.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/17.jpg"
+          alt=""
+        />
+        <img
+          src="imgs/18.jpg"
+          alt=""
+        />
+      </main>
+    </section>
+
+    <section class="container meme-editor-container flex">
+      <div class="canvas-container">
+        <canvas
+          class="canvas"
+          height="500"
+          width="500"
+          onclick="draw(event)"
+        >
+        </canvas>
+      </div>
+
+      <div class="control-panel">
+        <input
+          type="color"
+          class="fill-color"
+          onchange="setFillColor(this.value)"
+          value="#ffffff"
+        />
+        <input
+          type="color"
+          class="stroke-color"
+          onchange="setStrokeColor(this.value)"
+          value="#000000"
+        />
+        <select
+          name="shapes"
+          class="shapes"
+          onchange="setShape(this.value)"
+        >
+          <option value="line">Line</option>
+          <option value="triangle">Triangle</option>
+          <option value="rect">Rectangle</option>
+          <option value="arc">Circle</option>
+          <option value="text">Text</option>
+          <option value="pencil">Pencil</option>
+        </select>
+        <button onclick="clearCanvas()">Clear</button>
+      </div>
+    </section>
+
+    <section class="container memes-container">
+      <h2>"memes-container" To Be Continue...</h2>
+    </section>
+
+    <section class="container about-container">
+      <h2>"about-container" To Be Continue...</h2>
+    </section>
+
+    <script src="js/main.js"></script>
+    <script src="js/gallery-controler.js"></script>
+    <script src="js/gallery-service.js"></script>
+    <script src="js/meme-editor-controler.js"></script>
+    <script src="js/meme-editor-service.js"></script>
+  </body>
+</html>

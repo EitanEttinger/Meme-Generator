@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* @media only screen and (max-width: 600px) {
+  .imgs-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .imgs-container {
+    grid-template-columns: 1fr;
+  }
+} */
