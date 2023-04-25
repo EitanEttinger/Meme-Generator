@@ -6,26 +6,32 @@
 
 body {
   text-align: center;
-  background-color: white;
+  background-color: #99bcd3;
+
+  text-align: center;
 }
 
 .header {
   height: 20vh;
 
-  background-color: blue;
+  background-color: #005792;
 }
 
 button {
   margin-block-start: 20px;
+  margin-inline: 15px;
   padding-inline: 7px;
 
   border-radius: 20px;
+
+  cursor: pointer;
 }
 
 .container {
-  width: 100vw;
+  width: 90vw;
+  margin-inline: auto;
 
-  border: 5px solid blue;
+  border: 5px solid #005792;
 }
 
 .gallery-container .imgs-container {
@@ -50,20 +56,20 @@ img {
   height: 60vh;
 }
 
-canvas {
+.canvas {
   display: block;
   margin: auto;
-  background-color: lightpink;
-  border: 5px solid black;
+  background-color: #4d89b3;
+  border: 5px solid #00233a;
 
-  cursor: crosshair;
+  cursor: grab;
 }
 
 .control-panel {
   width: 50vw;
   height: 10vh;
 
-  border: 5px solid black;
+  border: 5px solid #00233a;
 }
 
 .memes-container {
@@ -72,6 +78,19 @@ canvas {
 
 .about-container {
   height: 30vh;
+}
+
+.footer {
+  height: 40vh;
+
+  background-color: #005792;
+}
+
+.footer .logo {
+  height: 20vh;
+  width: 33vw;
+
+  margin-inline: auto;
 }
 
 /* HELPERS */
