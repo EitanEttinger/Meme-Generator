@@ -8,10 +8,15 @@
   .imgs-container {
     grid-template-columns: repeat(2, 1fr);
   }
-}
-
-@media only screen and (max-width: 400px) {
-  .imgs-container {
-    grid-template-columns: 1fr;
-  }
 } */
+
+@media only screen and (max-width: 800px) {
+  .meme-editor-container {
+    flex-direction: column;
+  }
+
+  .canvas-container {
+    width: 88vw;
+    margin-inline: auto;
+  }
+}

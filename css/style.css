@@ -28,7 +28,7 @@ button {
 }
 
 .container {
-  width: 90vw;
+  width: 95vw;
   margin-inline: auto;
 
   border: 5px solid #005792;
@@ -52,8 +52,14 @@ img {
   grid-column: span 2;
 } */
 
-.meme-editor-container {
-  height: 60vh;
+.canvas-container {
+  width: 45vw;
+
+  margin-inline: auto;
+}
+
+.control-panel {
+  margin-inline: auto;
 }
 
 .canvas {
