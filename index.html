@@ -31,12 +31,12 @@
         />
       </div>
 
-      <div class="header-btns">
+      <section class="header-btns">
         <button class="gallery-hdr-btn">Gallery</button>
         <button class="meme-editor-hdr-btn">Meme-editor</button>
         <button class="memes-hdr-btn">Memes</button>
         <button class="about-hdr-btn">About</button>
-      </div>
+      </section>
     </header>
 
     <h1 class="page-title">Page Title</h1>
@@ -47,91 +47,109 @@
       </div>
       <main class="imgs-container grid">
         <img
+          class="img1"
           src="imgs/1.jpg"
           alt=""
           onclick="drawImg(this, 1)"
-        />
-        <img
+          />
+          <img
+          class="img2"
           src="imgs/2.jpg"
           alt=""
           onclick="drawImg(this, 2)"
-        />
-        <img
+          />
+          <img
+          class="img3"
           src="imgs/3.jpg"
           alt=""
           onclick="drawImg(this, 3)"
-        />
-        <img
+          />
+          <img
+          class="img4"
           src="imgs/4.jpg"
           alt=""
           onclick="drawImg(this, 4)"
-        />
-        <img
+          />
+          <img
+          class="img5"
           src="imgs/5.jpg"
           alt=""
           onclick="drawImg(this, 5)"
-        />
-        <img
+          />
+          <img
+          class="img6"
           src="imgs/6.jpg"
           alt=""
           onclick="drawImg(this, 6)"
-        />
-        <img
+          />
+          <img
+          class="img7"
           src="imgs/7.jpg"
           alt=""
           onclick="drawImg(this, 7)"
-        />
-        <img
+          />
+          <img
+          class="img8"
           src="imgs/8.jpg"
           alt=""
           onclick="drawImg(this, 8)"
-        />
-        <img
+          />
+          <img
+          class="img9"
           src="imgs/9.jpg"
           alt=""
           onclick="drawImg(this, 9)"
-        />
-        <img
+          />
+          <img
+          class="img10"
           src="imgs/10.jpg"
           alt=""
           onclick="drawImg(this, 10)"
-        />
-        <img
+          />
+          <img
+          class="img11"
           src="imgs/11.jpg"
           alt=""
           onclick="drawImg(this, 11)"
-        />
-        <img
+          />
+          <img
+          class="img12"
           src="imgs/12.jpg"
           alt=""
           onclick="drawImg(this, 12)"
-        />
-        <img
+          />
+          <img
+          class="img13"
           src="imgs/13.jpg"
           alt=""
           onclick="drawImg(this, 13)"
-        />
-        <img
+          />
+          <img
+          class="img14"
           src="imgs/14.jpg"
           alt=""
           onclick="drawImg(this, 14)"
-        />
-        <img
+          />
+          <img
+          class="img15"
           src="imgs/15.jpg"
           alt=""
           onclick="drawImg(this, 15)"
-        />
-        <img
+          />
+          <img
+          class="img16"
           src="imgs/16.jpg"
           alt=""
           onclick="drawImg(this, 16)"
-        />
-        <img
+          />
+          <img
+          class="img17"
           src="imgs/17.jpg"
           alt=""
           onclick="drawImg(this, 17)"
-        />
-        <img
+          />
+          <img
+          class="img18"
           src="imgs/18.jpg"
           alt=""
           onclick="drawImg(this, 18)"
@@ -150,60 +168,101 @@
         </canvas>
       </div>
 
-      <div class="control-panel">
-        <input
+      <section class="control-panel">
+        <section class="panel color-size-panel">
+          
+          <label for="text-line">fill color:</label>
+          <input
+          type="text"
+          name="Text-line"
+          id="Text-line"
+          class="fill-color"
+          onchange="setTextLine(this.value)"
+          value='Text-text-to-be-continue'
+          />
+
+
+          <label for="fill-color">fill color:</label>
+          <input
           type="color"
+          name="fill-color"
+          id="fill-color"
           class="fill-color"
           onchange="setFillColor(this.value)"
           value="#ffffff"
-        />
-        <input
+          />
+  
+          <label for="stroke-color">stroke color:</label>
+          <input
           type="color"
+          name="stroke-color"
+          id="stroke-color"
           class="stroke-color"
           onchange="setStrokeColor(this.value)"
           value="#000000"
-        />
-        <select
-          name="shapes"
-          class="shapes"
-          onchange="setShape(this.value)"
-        >
-          <option value="line">Line</option>
-          <option value="triangle">Triangle</option>
-          <option value="rect">Rectangle</option>
-          <option value="arc">Circle</option>
-          <option value="text">Text</option>
-          <option value="pencil">Pencil</option>
-        </select>
-        <button onclick="clearCanvas()">Clear</button>
+          />
+  
+          <label for="font-size">font size:</label>
+          <input
+          type="number"
+          name="font-size"
+          id="font-size"
+          class="font-size"
+          onchange="setFontSize(this.value)"
+          value=50
+          />
+  
+          <select
+            name="shapes"
+            id="shapes"
+            class="shapes"
+            onchange="setShape(this.value)"
+          >
+            <option value="line">Line</option>
+            <option value="triangle">Triangle</option>
+            <option value="rect">Rectangle</option>
+            <option value="arc">Circle</option>
+            <option value="text">Text</option>
+            <option value="pencil">Pencil</option>
+          </select>
+        </section>
 
+        
         <!-- ICONS -->
-
-        <button type="button"><img src="icons/add.png" alt=""> add</button>
-        <button type="button"><img src="icons/trash.png" alt=""> trash</button>
-        <button type="button"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> pick line</button>
-        <button type="button"><img src="icons/align-to-left.png" alt=""> align left</button>
-        <button type="button"><img src="icons/center-text-alignment.png" alt=""> align center</button>
-        <button type="button"><img src="icons/align-to-right.png" alt=""> align right</button>
-        <button type="button"><img src="icons/decrease font - icon.png" alt=""> decrease</button>
-        <button type="button"><img src="icons/increase font - icon.png" alt=""> increase</button>
-        <button type="button"><img src="icons/paint-board-and-brush.png" alt=""> paint</button>
-        <button type="button"><img src="icons/text stroke.png" alt=""> stroke</button>
-        <button type="button"><img src="icons/facebook-logo.png" alt=""> facebook</button>
-        <button type="button"><img src="icons/search-icon.png" alt=""> search</button>
-      
-        <div class="inputs">
-          <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
-      
-          <button class="btn" onclick="onUploadImg()">
-            Upload Image from Canvas
+        <section class="panel icons-control-panel">
+          <button type="button"><img src="icons/add.png" alt=""> add</button>
+          <button type="button"><img src="icons/trash.png" alt=""> trash</button>
+          <button type="button"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> pick line</button>
+          <button type="button"><img src="icons/align-to-left.png" alt=""> align left</button>
+          <button type="button"><img src="icons/center-text-alignment.png" alt=""> align center</button>
+          <button type="button"><img src="icons/align-to-right.png" alt=""> align right</button>
+          <button type="button"><img src="icons/decrease font - icon.png" alt=""> decrease</button>
+          <button type="button"><img src="icons/increase font - icon.png" alt=""> increase</button>
+          <button type="button"><img src="icons/paint-board-and-brush.png" alt=""> paint</button>
+          <button type="button"><img src="icons/text stroke.png" alt=""> stroke</button>
+          <button type="button"><img src="icons/facebook-logo.png" alt=""> facebook</button>
+          <button type="button"><img src="icons/search-icon.png" alt=""> search</button>
+        </section>
+        
+        <section class="panel out-of-control-panel">
+          
+          <label for="upload-facebook-btn">Upload to facebook:</label>
+          <button id="upload-facebook-btn" class="upload-facebook-btn" onclick="onUploadImg()">
+            Upload to facebook
           </button>
-      
-          <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
-        </div>
-            </div>
+          
+          <label for="download-img-btn">Download image:</label>
+          <a href="#" id="download-img-btn" class="download-img-btn" onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
+          
+          <label for="upload-img-btn">Upload image:</label>
+          <input type="file" id="upload-img-btn" class="upload-img-btn" name="image" onchange="onImgInput(event)" />
+          
+          <!-- <label for="clear-canvas">clear:</label> -->
+          <button id="clear-canvas" onclick="clearCanvas()">Clear</button>
+        </section>
+      </section>
     </section>
-
+    
     <section class="container memes-container">
       <h2>"memes-container" To Be Continue...</h2>
     </section>

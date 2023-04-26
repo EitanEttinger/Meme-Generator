@@ -18,13 +18,22 @@ body {
 }
 
 button {
-  margin-block-start: 20px;
-  margin-inline: 15px;
-  padding-inline: 7px;
+  margin-inline: 7px;
+  margin-block-start: 40px;
+  padding-inline: 10px;
 
   border-radius: 20px;
 
   cursor: pointer;
+}
+
+.control-panel {
+  width: 45vw;
+  height: 60vh;
+  margin-inline: auto;
+  margin-block: auto;
+
+  border: 5px solid #00233a;
 }
 
 .control-panel button {
@@ -32,8 +41,33 @@ button {
   height: 30px;
 }
 
-.control-panel .inputs {
-  margin-block-start: 30px;
+.control-panel .panel {
+  margin-block: 20px;
+}
+
+.control-panel .out-of-control-panel {
+  width: 44vw;
+  height: 10vh;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(20px, 1fr));
+  grid-template-rows: repeat(2, minmax(60px, 1fr));
+  padding: 10px;
+  gap: 5px;
+
+  justify-items: center;
+  align-items: center;
+}
+
+.out-of-control-panel .upload-img-btn {
+  grid-column: span 2;
+}
+
+.out-of-control-panel button {
+  width: 100px;
+  height: 50px;
+
+  margin-block-start: 5px;
 }
 
 .container {
@@ -77,14 +111,6 @@ img {
   cursor: grab;
 }
 
-.control-panel {
-  width: 50vw;
-  height: 45vh;
-  margin-inline: auto;
-
-  border: 5px solid #00233a;
-}
-
 .memes-container {
   height: 30vh;
 }
@@ -107,10 +133,6 @@ img {
 }
 
 /* HELPERS */
-
-.grid {
-  display: grid;
-}
 
 .flex {
   display: flex;
