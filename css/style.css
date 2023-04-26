@@ -27,6 +27,15 @@ button {
   cursor: pointer;
 }
 
+.control-panel button {
+  width: 50px;
+  height: 30px;
+}
+
+.control-panel .inputs {
+  margin-block-start: 30px;
+}
+
 .container {
   width: 95vw;
   margin-inline: auto;
@@ -58,14 +67,11 @@ img {
   margin-inline: auto;
 }
 
-.control-panel {
-  margin-inline: auto;
-}
-
 .canvas {
   display: block;
   margin: auto;
-  background-color: #4d89b3;
+  /* background-color: #4d89b3; */
+  background-color: #000;
   border: 5px solid #00233a;
 
   cursor: grab;
@@ -73,7 +79,8 @@ img {
 
 .control-panel {
   width: 50vw;
-  height: 10vh;
+  height: 45vh;
+  margin-inline: auto;
 
   border: 5px solid #00233a;
 }

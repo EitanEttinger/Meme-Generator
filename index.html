@@ -23,6 +23,7 @@
 
   <body onload="init()">
     <header class="header flex">
+      
       <div class="logo">
         <img
           src="imgs/logo.jpg"
@@ -48,74 +49,92 @@
         <img
           src="imgs/1.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/2.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/3.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/4.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/5.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/6.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/7.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/8.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/9.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/10.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/11.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/12.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/13.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/14.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/15.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/16.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/17.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
         <img
           src="imgs/18.jpg"
           alt=""
+          onclick="drawImg(this)"
         />
       </main>
     </section>
@@ -157,7 +176,32 @@
           <option value="pencil">Pencil</option>
         </select>
         <button onclick="clearCanvas()">Clear</button>
-      </div>
+
+        <!-- ICONS -->
+
+        <button type="button"><img src="icons/add.png" alt=""> add</button>
+        <button type="button"><img src="icons/trash.png" alt=""> trash</button>
+        <button type="button"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> pick line</button>
+        <button type="button"><img src="icons/align-to-left.png" alt=""> align left</button>
+        <button type="button"><img src="icons/center-text-alignment.png" alt=""> align center</button>
+        <button type="button"><img src="icons/align-to-right.png" alt=""> align right</button>
+        <button type="button"><img src="icons/decrease font - icon.png" alt=""> decrease</button>
+        <button type="button"><img src="icons/increase font - icon.png" alt=""> increase</button>
+        <button type="button"><img src="icons/paint-board-and-brush.png" alt=""> paint</button>
+        <button type="button"><img src="icons/text stroke.png" alt=""> stroke</button>
+        <button type="button"><img src="icons/facebook-logo.png" alt=""> facebook</button>
+        <button type="button"><img src="icons/search-icon.png" alt=""> search</button>
+      
+        <div class="inputs">
+          <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+      
+          <button class="btn" onclick="onUploadImg()">
+            Upload Image from Canvas
+          </button>
+      
+          <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
+        </div>
+            </div>
     </section>
 
     <section class="container memes-container">
@@ -181,6 +225,8 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/upload-from-local.js"></script>
+    <script src="js/sharing-on-facebook.js"></script>  
     <script src="js/gallery-controler.js"></script>
     <script src="js/gallery-service.js"></script>
     <script src="js/meme-editor-controler.js"></script>
