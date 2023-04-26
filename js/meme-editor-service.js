@@ -1,20 +1,18 @@
 'use strict'
 
-// let gElCanvas
-// let gCtx
-
-// let gCurrShape = {
-//   shape: 'rect',
-//   fillColor: '#ffffff',
-//   strokeColor: '#000000',
-//   startPosX: 0,
-//   startPosY: 0,
-//   offsetX: 0,
-//   offsetY: 0,
-//   dX: 0,
-//   dY: 0,
-//   isDrag: false,
-// }
+let gCurrShape = {
+  shape: 'rect',
+  text: `Hello MF`,
+  fillColor: '#ffffff',
+  strokeColor: '#000000',
+  startPosX: 0,
+  startPosY: 0,
+  offsetX: 0,
+  offsetY: 0,
+  dX: 0,
+  dY: 0,
+  isDrag: false,
+}
 
 let gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
 
@@ -76,6 +74,10 @@ let gMeme = {
 
 function getMeme() {
   return gMeme
+}
+
+function getCurrShape() {
+  return gCurrShape
 }
 
 function setLineTxt() {}
