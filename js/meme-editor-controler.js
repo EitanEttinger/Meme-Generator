@@ -15,81 +15,97 @@ function init() {
   renderMeme()
 }
 
+// let gMeme = {
+//   selectedImgId: 5,
+//   selectedLineIdx: 0,
+//   lines: [
+//     {
+//       shape: 'text',
+//       text: 'Hello Baby',
+//       font: 'Impact',
+//       fontSize: '50',
+//       textAlign: 'center',
+//       textBaseline: 'middle',
+//       lineWidth: 3,
+//       fillColor: '#ffffff',
+//       strokeColor: '#000000',
+//       startPosX: 0,
+//       startPosY: 0,
+//       offsetX: 0,
+//       offsetY: 100,
+//       dX: 0,
+//       dY: 0,
+//       isDrag: false,
+//     },
+
 function renderMeme() {
-  const gCurrShape = getCurrShape()
+  // const gCurrShape = getCurrShape()
+
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
+
   const elImg = document.querySelector(`.img3`)
 
   drawImg(elImg, 3)
   // LINE 1
-  gCurrShape.offsetX = 100
+  gCurrShape.offsetX = gElCanvas.width / 2
   gCurrShape.offsetY = 50
 
   drawText(gCurrShape)
   // LINE 2
-  gCurrShape.offsetX = 100
-  gCurrShape.offsetY = 450
+  gCurrShape.offsetX = gElCanvas.width / 2
+  gCurrShape.offsetY = gElCanvas.height - 50
 
   drawText(gCurrShape)
 }
 
-function drawText({
-  offsetX,
-  offsetY,
-  fontSize,
-  strokeColor,
-  fillColor,
-  text,
-}) {
-  gCtx.lineWidth = 2
-  gCtx.strokeStyle = strokeColor
-  gCtx.fillStyle = fillColor
-  gCtx.font = `${fontSize}px Arial`
-  gCtx.textAlign = 'center'
-  gCtx.textBaseline = 'middle'
-
-  gCtx.fillText(text, offsetX, offsetY) // Draws (fills) a given text at the given (x, y) position.
-  gCtx.strokeText(text, offsetX, offsetY) // Draws (strokes) a given text at the given (x, y) position.
-}
-
-function drawImg(elImg, idImg) {
-  const meme = getMeme()
-  meme.selectedImgId = idImg
-
-  gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-}
-
 function setTextLine(textLine) {
-  const gCurrShape = getCurrShape()
+  // const gCurrShape = getCurrShape()
+
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
 
   gCurrShape.text = textLine
 }
 
 function setFontSize(fontSz) {
-  const gCurrShape = getCurrShape()
+  // const gCurrShape = getCurrShape()
+
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
 
   gCurrShape.fontSize = fontSz
 }
 
 function setFillColor(fillClr) {
-  const gCurrShape = getCurrShape()
+  // const gCurrShape = getCurrShape()
+
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
 
   gCurrShape.fillColor = fillClr
 }
 
 function setStrokeColor(strokeClr) {
-  const gCurrShape = getCurrShape()
+  // const gCurrShape = getCurrShape()
+
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
 
   gCurrShape.strokeColor = strokeClr
 }
 
-function clearCanvas() {
-  gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
-}
-
 function setShape(shp) {
-  const gCurrShape = getCurrShape()
+  // const gCurrShape = getCurrShape()
+
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
 
   gCurrShape.shape = shp
+}
+
+function clearCanvas() {
+  gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
 function resizeCanvas() {
@@ -120,8 +136,13 @@ function addTouchListeners() {
 }
 
 function onDown(ev) {
-  const gCurrShape = getCurrShape()
-  const { offsetX, offsetY } = getCurrShape()
+  // const gCurrShape = getCurrShape()
+
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
+
+  const { offsetX, offsetY } = gCurrShape
+
   gCurrShape.isDrag = true
   // Get the ev pos from mouse or touch
   getEvPos(ev)
@@ -132,8 +153,12 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-  const gCurrShape = getCurrShape()
-  const { isDrag, offsetX, offsetY, startPosX, startPosY } = getCurrShape()
+  // const gCurrShape = getCurrShape()
+
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
+
+  const { isDrag, offsetX, offsetY, startPosX, startPosY } = gCurrShape
 
   if (!isDrag) return
 
@@ -150,14 +175,21 @@ function onMove(ev) {
 }
 
 function onUp() {
-  const gCurrShape = getCurrShape()
+  // const gCurrShape = getCurrShape()
+
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
 
   gCurrShape.isDrag = false
   document.body.style.cursor = 'grab'
 }
 
 function getEvPos(ev) {
-  const gCurrShape = getCurrShape()
+  // const gCurrShape = getCurrShape()
+
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
+
   // Gets the offset pos , the default pos
   gCurrShape.offsetX = ev.offsetX
   gCurrShape.offsetY = ev.offsetY
@@ -174,7 +206,10 @@ function getEvPos(ev) {
 }
 
 function draw() {
-  const { shape } = getCurrShape()
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
+
+  const { shape } = gCurrShape
 
   switch (shape) {
     case 'rect':
@@ -192,17 +227,33 @@ function draw() {
   }
 }
 
-function drawRect({ offsetX, offsetY, dX, dY, strokeColor, fillColor }) {
-  gCtx.lineWidth = 5
+function drawRect({
+  lineWidth,
+  offsetX,
+  offsetY,
+  dX,
+  dY,
+  strokeColor,
+  fillColor,
+}) {
+  gCtx.lineWidth = lineWidth
   gCtx.strokeStyle = strokeColor
   gCtx.strokeRect(offsetX, offsetY, dX, dY)
   gCtx.fillStyle = fillColor
   gCtx.fillRect(offsetX, offsetY, dX, dY)
 }
 
-function drawArc({ offsetX, offsetY, dX, dY, strokeColor, fillColor }) {
+function drawArc({
+  lineWidth,
+  offsetX,
+  offsetY,
+  dX,
+  dY,
+  strokeColor,
+  fillColor,
+}) {
   gCtx.beginPath()
-  gCtx.lineWidth = 5
+  gCtx.lineWidth = lineWidth
   // The x,y cords of the center , The radius, The starting angle, The ending angle, in radians
   gCtx.arc(offsetX, offsetY, dX + dY, 0, 2 * Math.PI) // Used to create a circle
   gCtx.strokeStyle = strokeColor
@@ -211,9 +262,9 @@ function drawArc({ offsetX, offsetY, dX, dY, strokeColor, fillColor }) {
   gCtx.fill()
 }
 
-function drawPencil({ offsetX, offsetY, strokeColor, fillColor }) {
+function drawPencil({ lineWidth, offsetX, offsetY, strokeColor, fillColor }) {
   gCtx.beginPath()
-  gCtx.lineWidth = 5
+  gCtx.lineWidth = lineWidth
   // The x,y cords of the center , The radius, The starting angle, The ending angle, in radians
   gCtx.arc(offsetX, offsetY, 5, 0, 2 * Math.PI) // Used to create a circle
   gCtx.strokeStyle = strokeColor
@@ -222,13 +273,24 @@ function drawPencil({ offsetX, offsetY, strokeColor, fillColor }) {
   gCtx.fill()
 }
 
-function drawText({ offsetX, offsetY, dX, dY, strokeColor, fillColor, text }) {
-  gCtx.lineWidth = 2
+function drawText({
+  lineWidth,
+  font,
+  fontSize,
+  textAlign,
+  textBaseline,
+  offsetX,
+  offsetY,
+  strokeColor,
+  fillColor,
+  text,
+}) {
+  gCtx.lineWidth = lineWidth
   gCtx.strokeStyle = strokeColor
   gCtx.fillStyle = fillColor
-  gCtx.font = `${dX + dY}px Arial`
-  gCtx.textAlign = 'center'
-  gCtx.textBaseline = 'middle'
+  gCtx.font = fontSize + 'px ' + font
+  gCtx.textAlign = textAlign
+  gCtx.textBaseline = textBaseline
 
   gCtx.fillText(text, offsetX, offsetY) // Draws (fills) a given text at the given (x, y) position.
   gCtx.strokeText(text, offsetX, offsetY) // Draws (strokes) a given text at the given (x, y) position.
