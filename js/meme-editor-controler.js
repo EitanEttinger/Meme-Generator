@@ -13,35 +13,71 @@ function init() {
   addListeners()
 
   renderMeme()
+
+  onSetSection('Gallery')
+
+  const currSection = document.querySelector(`.Meme-Editor`)
+
+  currSection.classList.add('hidden')
 }
 
 function renderMeme() {
   // const gCurrShape = getCurrShape()
 
   const meme = getMeme()
-  const gCurrShape = meme.lines[meme.selectedLineIdx]
+  const { selectedImgId, selectedLineIdx, lines } = getMeme()
+  let gCurrShape = meme.lines[meme.selectedLineIdx]
 
-  const elImg = document.querySelector(`.img3`)
+  // IMAGE
+  const elImg = document.querySelector(`.img${selectedImgId}`)
+  drawImg(elImg, selectedImgId)
 
-  drawImg(elImg, 3)
+  // LINE SELECTED
+  // IF IT'S LINE 1:
+  gCurrShape.offsetX = 10
+  gCurrShape.offsetY = 10
+  gCurrShape.dX = gElCanvas.offsetWidth - 30
+  gCurrShape.dY = 110 - 30
+
+  drawRect(gCurrShape)
+
+  // IF IT'S LINE 2:
+  gCurrShape.offsetX = 10
+  gCurrShape.offsetY = 420
+  gCurrShape.dX = gElCanvas.offsetWidth - 30
+  gCurrShape.dY = 110 - 30
+
+  drawRect(gCurrShape)
+
+  // IF IT'S LINE 3:
+  gCurrShape.offsetX = 10
+  gCurrShape.offsetY = 200
+  gCurrShape.dX = gElCanvas.offsetWidth - 30
+  gCurrShape.dY = 110 - 30
+
+  // drawRect(gCurrShape)
+
   // LINE 1
+  gCurrShape = lines[0]
   gCurrShape.offsetX = gElCanvas.width / 2
   gCurrShape.offsetY = 50
 
   drawText(gCurrShape)
+
   // LINE 2
+  gCurrShape = lines[1]
   gCurrShape.offsetX = gElCanvas.width / 2
   gCurrShape.offsetY = gElCanvas.height - 50
 
   drawText(gCurrShape)
 }
 
-function onSetSection(elButton) {
+function onSetSection(innerText) {
   const sections = document.querySelectorAll(`.page-container`)
-  console.log('elButton.innerText', elButton.innerText)
+  console.log('innerText', innerText)
 
   sections.forEach((page) => page.classList.add('hidden'))
-  const currSection = document.querySelector(`.${elButton.innerText}`)
+  const currSection = document.querySelector(`.${innerText}`)
   currSection.classList.remove('hidden')
 }
 
@@ -234,8 +270,9 @@ function drawRect({
   gCtx.lineWidth = lineWidth
   gCtx.strokeStyle = strokeColor
   gCtx.strokeRect(offsetX, offsetY, dX, dY)
-  gCtx.fillStyle = fillColor
-  gCtx.fillRect(offsetX, offsetY, dX, dY)
+
+  // gCtx.fillStyle = fillColor
+  // gCtx.fillRect(offsetX, offsetY, dX, dY)
 }
 
 function drawArc({
@@ -304,6 +341,7 @@ function drawImg(elImg, idImg) {
   meme.selectedImgId = idImg
 
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+  onSetSection('Meme-Editor')
 }
 
 function downloadImg(elLink) {
