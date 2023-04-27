@@ -32,16 +32,16 @@
       </div>
 
       <section class="header-btns">
-        <button class="gallery-hdr-btn">Gallery</button>
-        <button class="meme-editor-hdr-btn">Meme-editor</button>
-        <button class="memes-hdr-btn">Memes</button>
-        <button class="about-hdr-btn">About</button>
+        <button class="gallery-hdr-btn" onclick="onSetSection(this)">Gallery</button>
+        <button class="meme-editor-hdr-btn" onclick="onSetSection(this)">Meme-Editor</button>
+        <button class="memes-hdr-btn" onclick="onSetSection(this)">Memes</button>
+        <button class="about-hdr-btn" onclick="onSetSection(this)">About</button>
       </section>
     </header>
 
     <h1 class="page-title">Page Title</h1>
 
-    <section class="container gallery-container">
+    <section class="container gallery-container page-container Gallery">
       <div class="search-panel">
         <h2>"search-panel" To Be Continue...</h2>
       </div>
@@ -157,7 +157,7 @@
       </main>
     </section>
 
-    <section class="container meme-editor-container flex">
+    <section class="container meme-editor-container page-container Meme-Editor flex">
       <div class="canvas-container">
         <canvas
           class="canvas"
@@ -171,14 +171,14 @@
       <section class="control-panel">
         <section class="panel color-size-panel">
           
-          <label for="text-line">fill color:</label>
+          <label for="text-line">fill text:</label>
           <input
           type="text"
           name="Text-line"
           id="Text-line"
-          class="fill-color"
-          onchange="setTextLine(this.value)"
-          value='Text-text-to-be-continue'
+          class="Text-line"
+          onchange="onSetTextLine(this.value)"
+          value=''
           />
 
 
@@ -230,7 +230,7 @@
         
         <!-- ICONS -->
         <section class="panel icons-control-panel">
-          <button type="button"><img src="icons/add.png" alt=""> add</button>
+          <button type="button" onclick="addTextLine()"><img src="icons/add.png" alt=""> add</button>
           <button type="button"><img src="icons/trash.png" alt=""> trash</button>
           <button type="button"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> pick line</button>
           <button type="button"><img src="icons/align-to-left.png" alt=""> align left</button>
@@ -263,11 +263,11 @@
       </section>
     </section>
     
-    <section class="container memes-container">
+    <section class="container memes-container page-container Memes">
       <h2>"memes-container" To Be Continue...</h2>
     </section>
 
-    <section class="container about-container">
+    <section class="container about-container page-container About">
       <h2>"about-container" To Be Continue...</h2>
     </section>
 
@@ -283,7 +283,7 @@
       <h3>&#128153 &#128153 &#128153 &#128153 &#128153</h3>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/services/util.service.js"></script>
     <script src="js/upload-from-local.js"></script>
     <script src="js/sharing-on-facebook.js"></script>  
     <script src="js/gallery-controler.js"></script>

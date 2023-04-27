@@ -1,5 +1,10 @@
 'use strict'
 
+const GALLERY_STORAGE_KEY = 'ImgsDB'
+const KEYWORD_SEARCH_STORAGE_KEY = 'KeywordSearchDB'
+const EDITOR_STORAGE_KEY = 'CurrMemeDB'
+const MEMES_STORAGE_KEY = 'MemesDB'
+
 let gCurrShape = {
   shape: 'text',
   text: 'Hello Baby',
@@ -12,7 +17,7 @@ let gCurrShape = {
   strokeColor: '#000000',
   startPosX: 0,
   startPosY: 0,
-  offsetX: 0,
+  offsetX: 200,
   offsetY: 100,
   dX: 0,
   dY: 0,
@@ -58,7 +63,7 @@ let gMeme = {
       strokeColor: '#000000',
       startPosX: 0,
       startPosY: 0,
-      offsetX: 0,
+      offsetX: 200,
       offsetY: 100,
       dX: 0,
       dY: 0,
@@ -76,14 +81,16 @@ let gMeme = {
       strokeColor: '#000000',
       startPosX: 0,
       startPosY: 0,
-      offsetX: 0,
-      offsetY: 100,
+      offsetX: 200,
+      offsetY: 400,
       dX: 0,
       dY: 0,
       isDrag: false,
     },
   ],
 }
+
+let gMemes = []
 
 function getMeme() {
   return gMeme
@@ -93,6 +100,103 @@ function getCurrShape() {
   return gCurrShape
 }
 
-function setLineTxt() {}
+function getMemes() {
+  return gMemes
+}
 
 function setImg() {}
+
+function setTextLine(textLine) {
+  const meme = gMeme
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
+
+  gCurrShape.text = textLine
+
+  _saveToStorage()
+}
+
+function addTextLine() {
+  const textLine = document.querySelector(`.Text-line`).value
+
+  const meme = gMeme
+  const CurrLines = meme.lines
+
+  CurrLines.push(_createLine(textLine))
+
+  meme.selectedLineIdx = CurrLines.length - 1
+
+  _saveToStorage()
+}
+
+function _createLine(textLine = '333333333') {
+  return {
+    shape: 'text',
+    text: textLine,
+    font: 'Impact',
+    fontSize: '50',
+    textAlign: 'center',
+    textBaseline: 'middle',
+    lineWidth: 3,
+    fillColor: '#ffffff',
+    strokeColor: '#000000',
+    startPosX: 0,
+    startPosY: 0,
+    offsetX: 200,
+    offsetY: 250,
+    dX: 0,
+    dY: 0,
+    isDrag: false,
+  }
+}
+
+function _createMeme() {
+  return {
+    selectedImgId: 5,
+    selectedLineIdx: 0,
+    lines: [
+      {
+        shape: 'text',
+        text: 'Hello Baby',
+        font: 'Impact',
+        fontSize: '50',
+        textAlign: 'center',
+        textBaseline: 'middle',
+        lineWidth: 3,
+        fillColor: '#ffffff',
+        strokeColor: '#000000',
+        startPosX: 0,
+        startPosY: 0,
+        offsetX: 200,
+        offsetY: 100,
+        dX: 0,
+        dY: 0,
+        isDrag: false,
+      },
+      {
+        shape: 'text',
+        text: 'Hello Baby',
+        font: 'Impact',
+        fontSize: '50',
+        textAlign: 'center',
+        textBaseline: 'middle',
+        lineWidth: 3,
+        fillColor: '#ffffff',
+        strokeColor: '#000000',
+        startPosX: 0,
+        startPosY: 0,
+        offsetX: 200,
+        offsetY: 400,
+        dX: 0,
+        dY: 0,
+        isDrag: false,
+      },
+    ],
+  }
+}
+
+function _saveToStorage() {
+  saveToStorage(GALLERY_STORAGE_KEY, gImgs)
+  saveToStorage(KEYWORD_SEARCH_STORAGE_KEY, gKeywordSearchCountMap)
+  saveToStorage(EDITOR_STORAGE_KEY, gMeme)
+  saveToStorage(MEMES_STORAGE_KEY, gMemes)
+}

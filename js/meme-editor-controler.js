@@ -15,29 +15,6 @@ function init() {
   renderMeme()
 }
 
-// let gMeme = {
-//   selectedImgId: 5,
-//   selectedLineIdx: 0,
-//   lines: [
-//     {
-//       shape: 'text',
-//       text: 'Hello Baby',
-//       font: 'Impact',
-//       fontSize: '50',
-//       textAlign: 'center',
-//       textBaseline: 'middle',
-//       lineWidth: 3,
-//       fillColor: '#ffffff',
-//       strokeColor: '#000000',
-//       startPosX: 0,
-//       startPosY: 0,
-//       offsetX: 0,
-//       offsetY: 100,
-//       dX: 0,
-//       dY: 0,
-//       isDrag: false,
-//     },
-
 function renderMeme() {
   // const gCurrShape = getCurrShape()
 
@@ -59,13 +36,31 @@ function renderMeme() {
   drawText(gCurrShape)
 }
 
-function setTextLine(textLine) {
-  // const gCurrShape = getCurrShape()
+function onSetSection(elButton) {
+  const sections = document.querySelectorAll(`.page-container`)
+  console.log('elButton.innerText', elButton.innerText)
 
+  sections.forEach((page) => page.classList.add('hidden'))
+  const currSection = document.querySelector(`.${elButton.innerText}`)
+  currSection.classList.remove('hidden')
+}
+
+function onSetTextLine(textLine) {
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
 
-  gCurrShape.text = textLine
+  setTextLine(textLine)
+
+  drawText(gCurrShape)
+}
+
+function onAddTextLine(textLine) {
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
+
+  addTextLine(textLine)
+
+  drawText(gCurrShape)
 }
 
 function setFontSize(fontSz) {
@@ -314,10 +309,4 @@ function drawImg(elImg, idImg) {
 function downloadImg(elLink) {
   const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
   elLink.href = imgContent
-}
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min) + min) // The maximum is exclusive and the minimum is inclusive
 }
