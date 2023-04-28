@@ -10,6 +10,7 @@ function init() {
   gCtx = gElCanvas.getContext('2d')
 
   resizeCanvas()
+  setCanvasSize()
   addListeners()
 
   renderMeme()
@@ -21,11 +22,14 @@ function init() {
   currSection.classList.add('hidden')
 }
 
-function renderMeme() {
-  let meme = getMeme()
-  if (!meme.lines.length) meme = createMeme(meme.selectedImgId)
+function onSearch() {}
 
-  const gCurrShape = meme.lines[meme.selectedLineIdx]
+function renderMeme() {
+  const meme = getMeme()
+  const { lines, selectedLineIdx } = getMeme()
+  if (!lines.length) meme = createMeme(meme.selectedImgId)
+
+  const gCurrShape = lines[selectedLineIdx]
   const elInputTextLine = document.querySelector(`.Text-line`)
   elInputTextLine.value = `${gCurrShape.text}`
 
@@ -83,6 +87,42 @@ function onMoveLine() {
 
   const elInputTextLine = document.querySelector(`.Text-line`)
   elInputTextLine.value = `${gCurrShape.text}`
+
+  renderMeme()
+}
+
+// function setFontSize(x = 1) {}
+
+function onAlignLine(AlignType) {
+  const { lines, selectedLineIdx } = getMeme()
+
+  lines[selectedLineIdx].textAlign = AlignType
+
+  renderMeme()
+}
+
+function setFontSizeButton(deltaSize) {
+  const { lines, selectedLineIdx } = getMeme()
+  lines[selectedLineIdx].fontSize += deltaSize
+
+  const elInput = document.querySelector(`.font-size`)
+  elInput.value = lines[selectedLineIdx].fontSize
+
+  renderMeme()
+}
+
+function setFontSizeInput(fontSz) {
+  const { lines, selectedLineIdx } = getMeme()
+
+  lines[selectedLineIdx].fontSize = fontSz
+
+  renderMeme()
+}
+
+function onStrokeLine() {
+  const { lines, selectedLineIdx } = getMeme()
+
+  lines[selectedLineIdx].isStroke = !lines[selectedLineIdx].isStroke
 
   renderMeme()
 }
@@ -145,15 +185,18 @@ function drawText({
   strokeColor,
   fillColor,
   text,
+  isStroke,
 }) {
   gCtx.lineWidth = lineWidth
   gCtx.strokeStyle = strokeColor
   gCtx.fillStyle = fillColor
-  gCtx.font = fontSize + 'px ' + font
-  gCtx.textAlign = textAlign
+  gCtx.font = `${fontSize}px ${font}`
+  gCtx.textAlign = `${textAlign}`
   gCtx.textBaseline = textBaseline
 
   gCtx.fillText(text, offsetX, offsetY) // Draws (fills) a given text at the given (x, y) position.
+
+  if (!isStroke) return
   gCtx.strokeText(text, offsetX, offsetY) // Draws (strokes) a given text at the given (x, y) position.
 }
 
@@ -201,13 +244,6 @@ function drawRect({
   // gCtx.fillRect(offsetX, offsetY, dX, dY)
 }
 
-function setFontSize(fontSz) {
-  const meme = getMeme()
-  const gCurrShape = meme.lines[meme.selectedLineIdx]
-
-  gCurrShape.fontSize = fontSz
-}
-
 function setFillColor(fillClr) {
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
@@ -237,6 +273,12 @@ function resizeCanvas() {
   const elContainer = document.querySelector('.canvas-container')
   gElCanvas.width = elContainer.offsetWidth
   gElCanvas.height = elContainer.offsetHeight
+}
+
+function setCanvasSize() {
+  const meme = getMeme()
+  meme.canvasWidth = gElCanvas.width
+  meme.canvasHeight = gElCanvas.height
 }
 
 function addListeners() {

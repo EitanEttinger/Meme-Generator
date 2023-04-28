@@ -44,7 +44,11 @@
     <section class="container gallery-container page-container Gallery">
       <div class="search-panel">
         <h2>"search-panel" To Be Continue...</h2>
+        <label for="search-box">Search:</label>
+        <input type="search" name="search-box" id="search-box" class="search-box" oninput="onSearch()">
+        <!-- <img src="icons/search-icon.png" alt=""> -->
       </div>
+
       <main class="imgs-container grid">
         <img
           class="img1"
@@ -208,7 +212,7 @@
           name="font-size"
           id="font-size"
           class="font-size"
-          onchange="setFontSize(this.value)"
+          onchange="setFontSizeInput(this)"
           value=50
           />
   
@@ -233,23 +237,19 @@
           <button type="button" onclick="addTextLine()"><img src="icons/add.png" alt=""> add</button>
           <button type="button" onclick="onDeleteLine()"><img src="icons/trash.png" alt=""> trash</button>
           <button type="button" onclick="onMoveLine()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> pick line</button>
-          <button type="button"><img src="icons/align-to-left.png" alt=""> align left</button>
-          <button type="button"><img src="icons/center-text-alignment.png" alt=""> align center</button>
-          <button type="button"><img src="icons/align-to-right.png" alt=""> align right</button>
-          <button type="button"><img src="icons/decrease font - icon.png" alt=""> decrease</button>
-          <button type="button"><img src="icons/increase font - icon.png" alt=""> increase</button>
-          <button type="button"><img src="icons/paint-board-and-brush.png" alt=""> paint</button>
-          <button type="button"><img src="icons/text stroke.png" alt=""> stroke</button>
-          <button type="button"><img src="icons/facebook-logo.png" alt=""> facebook</button>
-          <button type="button"><img src="icons/search-icon.png" alt=""> search</button>
+          <button type="button" onclick="onAlignLine('right')"><img src="icons/align-to-left.png" alt=""> align left</button>
+          <button type="button" onclick="onAlignLine('center')"><img src="icons/center-text-alignment.png" alt=""> align center</button>
+          <button type="button" onclick="onAlignLine('left')"><img src="icons/align-to-right.png" alt=""> align right</button>
+          <button type="button" onclick="setFontSizeButton(-5)"><img src="icons/decrease font - icon.png" alt=""> decrease</button>
+          <button type="button" onclick="setFontSizeButton(5)"><img src="icons/increase font - icon.png" alt=""> increase</button>
+          <button type="button" onclick="onStrokeLine()"><img src="icons/text stroke.png" alt=""> stroke</button>
         </section>
         
         <section class="panel out-of-control-panel">
           
           <label for="upload-facebook-btn">Upload to facebook:</label>
-          <button id="upload-facebook-btn" class="upload-facebook-btn" onclick="onUploadImg()">
-            Upload to facebook
-          </button>
+          <button type="button" id="upload-facebook-btn" class="upload-facebook-btn" onclick="onUploadImg()"><img src="icons/facebook-logo.png" alt=""></button>
+
           
           <label for="download-img-btn">Download image:</label>
           <a href="#" id="download-img-btn" class="download-img-btn" onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>

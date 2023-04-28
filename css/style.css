@@ -27,6 +27,10 @@ button {
   cursor: pointer;
 }
 
+.upload-facebook-btn {
+  background-color: #4267b2;
+}
+
 .control-panel {
   width: 45vw;
   height: 60vh;

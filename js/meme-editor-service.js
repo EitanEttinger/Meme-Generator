@@ -7,9 +7,9 @@ const MEMES_STORAGE_KEY = 'MemesDB'
 
 let gCurrShape = {
   shape: 'text',
-  text: '',
+  text: 'Enter Text Line',
   font: 'Impact',
-  fontSize: '50',
+  fontSize: 50,
   textAlign: 'center',
   textBaseline: 'middle',
   lineWidth: 3,
@@ -22,6 +22,7 @@ let gCurrShape = {
   dX: 0,
   dY: 0,
   isDrag: false,
+  isStroke: true,
 }
 
 let gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
@@ -50,12 +51,14 @@ let gImgs = [
 let gMeme = {
   selectedImgId: 3,
   selectedLineIdx: 0,
+  canvasWidth: 0,
+  canvasHeight: 0,
   lines: [
     {
       shape: 'text',
-      text: '',
+      text: 'Enter Text Line',
       font: 'Impact',
-      fontSize: '50',
+      fontSize: 50,
       textAlign: 'center',
       textBaseline: 'middle',
       lineWidth: 3,
@@ -68,12 +71,13 @@ let gMeme = {
       dX: 0,
       dY: 0,
       isDrag: false,
+      isStroke: true,
     },
     {
       shape: 'text',
-      text: '',
+      text: 'Enter Text Line',
       font: 'Impact',
-      fontSize: '50',
+      fontSize: 50,
       textAlign: 'center',
       textBaseline: 'middle',
       lineWidth: 3,
@@ -86,6 +90,7 @@ let gMeme = {
       dX: 0,
       dY: 0,
       isDrag: false,
+      isStroke: true,
     },
   ],
 }
@@ -136,12 +141,21 @@ function deleteLine() {
   _saveToStorage()
 }
 
-function _createLine(textLine = '333333333') {
+function _createImg(keywords = ['funny']) {
+  const imgs = gImgs
+  return {
+    id: imgs.length,
+    url: `img/${imgs.length}.jpg`,
+    keywords: keywords,
+  }
+}
+
+function _createLine(textLine = 'Enter Text Line') {
   return {
     shape: 'text',
     text: textLine,
     font: 'Impact',
-    fontSize: '50',
+    fontSize: 50,
     textAlign: 'center',
     textBaseline: 'middle',
     lineWidth: 3,
@@ -154,6 +168,7 @@ function _createLine(textLine = '333333333') {
     dX: 0,
     dY: 0,
     isDrag: false,
+    isStroke: true,
   }
 }
 
@@ -161,12 +176,14 @@ function createMeme(imgIdx = 3) {
   return {
     selectedImgId: imgIdx,
     selectedLineIdx: 0,
+    canvasWidth: 0,
+    canvasHeight: 0,
     lines: [
       {
         shape: 'text',
-        text: '',
+        text: 'Enter Text Line',
         font: 'Impact',
-        fontSize: '50',
+        fontSize: 50,
         textAlign: 'center',
         textBaseline: 'middle',
         lineWidth: 3,
@@ -179,12 +196,13 @@ function createMeme(imgIdx = 3) {
         dX: 0,
         dY: 0,
         isDrag: false,
+        isStroke: true,
       },
       {
         shape: 'text',
-        text: '',
+        text: 'Enter Text Line',
         font: 'Impact',
-        fontSize: '50',
+        fontSize: 50,
         textAlign: 'center',
         textBaseline: 'middle',
         lineWidth: 3,
@@ -197,6 +215,7 @@ function createMeme(imgIdx = 3) {
         dX: 0,
         dY: 0,
         isDrag: false,
+        isStroke: true,
       },
     ],
   }
