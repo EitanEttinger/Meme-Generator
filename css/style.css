@@ -17,10 +17,6 @@ body {
   background-color: #005792;
 }
 
-.hidden {
-  display: none;
-}
-
 button {
   margin-inline: 7px;
   margin-block-start: 40px;
@@ -116,15 +112,17 @@ img {
 }
 
 .memes-container {
-  height: 30vh;
+  height: 90vh;
 }
 
 .about-container {
-  height: 30vh;
+  height: 90vh;
 }
 
 .footer {
   height: 40vh;
+
+  margin-block-start: 20px;
 
   background-color: #005792;
 }
@@ -142,4 +140,8 @@ img {
   display: flex;
   justify-content: space-between;
   align-content: center;
+}
+
+.hidden {
+  display: none;
 }

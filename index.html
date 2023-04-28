@@ -39,7 +39,7 @@
       </section>
     </header>
 
-    <h1 class="page-title">Page Title</h1>
+    <h1 class="page-title">Gallery</h1>
 
     <section class="container gallery-container page-container Gallery">
       <div class="search-panel">
@@ -50,109 +50,109 @@
           class="img1"
           src="imgs/1.jpg"
           alt=""
-          onclick="drawImg(this, 1)"
+          onclick="onSelectImg(this, 1)"
           />
           <img
           class="img2"
           src="imgs/2.jpg"
           alt=""
-          onclick="drawImg(this, 2)"
+          onclick="onSelectImg(this, 2)"
           />
           <img
           class="img3"
           src="imgs/3.jpg"
           alt=""
-          onclick="drawImg(this, 3)"
+          onclick="onSelectImg(this, 3)"
           />
           <img
           class="img4"
           src="imgs/4.jpg"
           alt=""
-          onclick="drawImg(this, 4)"
+          onclick="onSelectImg(this, 4)"
           />
           <img
           class="img5"
           src="imgs/5.jpg"
           alt=""
-          onclick="drawImg(this, 5)"
+          onclick="onSelectImg(this, 5)"
           />
           <img
           class="img6"
           src="imgs/6.jpg"
           alt=""
-          onclick="drawImg(this, 6)"
+          onclick="onSelectImg(this, 6)"
           />
           <img
           class="img7"
           src="imgs/7.jpg"
           alt=""
-          onclick="drawImg(this, 7)"
+          onclick="onSelectImg(this, 7)"
           />
           <img
           class="img8"
           src="imgs/8.jpg"
           alt=""
-          onclick="drawImg(this, 8)"
+          onclick="onSelectImg(this, 8)"
           />
           <img
           class="img9"
           src="imgs/9.jpg"
           alt=""
-          onclick="drawImg(this, 9)"
+          onclick="onSelectImg(this, 9)"
           />
           <img
           class="img10"
           src="imgs/10.jpg"
           alt=""
-          onclick="drawImg(this, 10)"
+          onclick="onSelectImg(this, 10)"
           />
           <img
           class="img11"
           src="imgs/11.jpg"
           alt=""
-          onclick="drawImg(this, 11)"
+          onclick="onSelectImg(this, 11)"
           />
           <img
           class="img12"
           src="imgs/12.jpg"
           alt=""
-          onclick="drawImg(this, 12)"
+          onclick="onSelectImg(this, 12)"
           />
           <img
           class="img13"
           src="imgs/13.jpg"
           alt=""
-          onclick="drawImg(this, 13)"
+          onclick="onSelectImg(this, 13)"
           />
           <img
           class="img14"
           src="imgs/14.jpg"
           alt=""
-          onclick="drawImg(this, 14)"
+          onclick="onSelectImg(this, 14)"
           />
           <img
           class="img15"
           src="imgs/15.jpg"
           alt=""
-          onclick="drawImg(this, 15)"
+          onclick="onSelectImg(this, 15)"
           />
           <img
           class="img16"
           src="imgs/16.jpg"
           alt=""
-          onclick="drawImg(this, 16)"
+          onclick="onSelectImg(this, 16)"
           />
           <img
           class="img17"
           src="imgs/17.jpg"
           alt=""
-          onclick="drawImg(this, 17)"
+          onclick="onSelectImg(this, 17)"
           />
           <img
           class="img18"
           src="imgs/18.jpg"
           alt=""
-          onclick="drawImg(this, 18)"
+          onclick="onSelectImg(this, 18)"
         />
       </main>
     </section>
@@ -177,8 +177,8 @@
           name="Text-line"
           id="Text-line"
           class="Text-line"
-          onchange="onSetTextLine(this.value)"
-          value=''
+          oninput="onSetTextLine(this.value)"
+          value='HELLO'
           />
 
 
@@ -231,8 +231,8 @@
         <!-- ICONS -->
         <section class="panel icons-control-panel">
           <button type="button" onclick="addTextLine()"><img src="icons/add.png" alt=""> add</button>
-          <button type="button"><img src="icons/trash.png" alt=""> trash</button>
-          <button type="button"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> pick line</button>
+          <button type="button" onclick="onDeleteLine()"><img src="icons/trash.png" alt=""> trash</button>
+          <button type="button" onclick="onMoveLine()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> pick line</button>
           <button type="button"><img src="icons/align-to-left.png" alt=""> align left</button>
           <button type="button"><img src="icons/center-text-alignment.png" alt=""> align center</button>
           <button type="button"><img src="icons/align-to-right.png" alt=""> align right</button>

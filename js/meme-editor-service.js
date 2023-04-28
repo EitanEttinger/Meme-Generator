@@ -7,7 +7,7 @@ const MEMES_STORAGE_KEY = 'MemesDB'
 
 let gCurrShape = {
   shape: 'text',
-  text: 'Hello Baby',
+  text: '',
   font: 'Impact',
   fontSize: '50',
   textAlign: 'center',
@@ -48,12 +48,12 @@ let gImgs = [
 ]
 
 let gMeme = {
-  selectedImgId: 5,
+  selectedImgId: 3,
   selectedLineIdx: 0,
   lines: [
     {
       shape: 'text',
-      text: 'Hello Baby',
+      text: '',
       font: 'Impact',
       fontSize: '50',
       textAlign: 'center',
@@ -71,7 +71,7 @@ let gMeme = {
     },
     {
       shape: 'text',
-      text: 'Hello Baby',
+      text: '',
       font: 'Impact',
       fontSize: '50',
       textAlign: 'center',
@@ -107,23 +107,31 @@ function getMemes() {
 function setImg() {}
 
 function setTextLine(textLine) {
-  const meme = gMeme
-  const gCurrShape = meme.lines[meme.selectedLineIdx]
+  const { lines, selectedLineIdx } = gMeme
 
-  gCurrShape.text = textLine
+  lines[selectedLineIdx].text = textLine
 
   _saveToStorage()
 }
 
 function addTextLine() {
-  const textLine = document.querySelector(`.Text-line`).value
-
   const meme = gMeme
   const CurrLines = meme.lines
 
-  CurrLines.push(_createLine(textLine))
+  CurrLines.push(_createLine(''))
 
-  meme.selectedLineIdx = CurrLines.length - 1
+  meme.selectedLineIdx = CurrLines.length - 2
+
+  _saveToStorage()
+}
+
+function deleteLine() {
+  const meme = gMeme
+  const { lines, selectedLineIdx } = gMeme
+
+  lines.splice(selectedLineIdx, 1)
+
+  meme.selectedLineIdx = 0
 
   _saveToStorage()
 }
@@ -149,14 +157,14 @@ function _createLine(textLine = '333333333') {
   }
 }
 
-function _createMeme() {
+function createMeme(imgIdx = 3) {
   return {
-    selectedImgId: 5,
+    selectedImgId: imgIdx,
     selectedLineIdx: 0,
     lines: [
       {
         shape: 'text',
-        text: 'Hello Baby',
+        text: '',
         font: 'Impact',
         fontSize: '50',
         textAlign: 'center',
@@ -174,7 +182,7 @@ function _createMeme() {
       },
       {
         shape: 'text',
-        text: 'Hello Baby',
+        text: '',
         font: 'Impact',
         fontSize: '50',
         textAlign: 'center',

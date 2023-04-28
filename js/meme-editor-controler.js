@@ -22,86 +22,186 @@ function init() {
 }
 
 function renderMeme() {
-  // const gCurrShape = getCurrShape()
+  let meme = getMeme()
+  if (!meme.lines.length) meme = createMeme(meme.selectedImgId)
 
-  const meme = getMeme()
-  const { selectedImgId, selectedLineIdx, lines } = getMeme()
-  let gCurrShape = meme.lines[meme.selectedLineIdx]
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
+  const elInputTextLine = document.querySelector(`.Text-line`)
+  elInputTextLine.value = `${gCurrShape.text}`
 
   // IMAGE
+  const { selectedImgId } = getMeme()
   const elImg = document.querySelector(`.img${selectedImgId}`)
   drawImg(elImg, selectedImgId)
 
-  // LINE SELECTED
-  // IF IT'S LINE 1:
-  gCurrShape.offsetX = 10
-  gCurrShape.offsetY = 10
-  gCurrShape.dX = gElCanvas.offsetWidth - 30
-  gCurrShape.dY = 110 - 30
+  // TEXTS
+  drawTextLine()
 
-  drawRect(gCurrShape)
-
-  // IF IT'S LINE 2:
-  gCurrShape.offsetX = 10
-  gCurrShape.offsetY = 420
-  gCurrShape.dX = gElCanvas.offsetWidth - 30
-  gCurrShape.dY = 110 - 30
-
-  drawRect(gCurrShape)
-
-  // IF IT'S LINE 3:
-  gCurrShape.offsetX = 10
-  gCurrShape.offsetY = 200
-  gCurrShape.dX = gElCanvas.offsetWidth - 30
-  gCurrShape.dY = 110 - 30
-
-  // drawRect(gCurrShape)
-
-  // LINE 1
-  gCurrShape = lines[0]
-  gCurrShape.offsetX = gElCanvas.width / 2
-  gCurrShape.offsetY = 50
-
-  drawText(gCurrShape)
-
-  // LINE 2
-  gCurrShape = lines[1]
-  gCurrShape.offsetX = gElCanvas.width / 2
-  gCurrShape.offsetY = gElCanvas.height - 50
-
-  drawText(gCurrShape)
+  // FRAME SELECTED
+  drawFrameSelected()
 }
 
 function onSetSection(innerText) {
   const sections = document.querySelectorAll(`.page-container`)
-  console.log('innerText', innerText)
 
   sections.forEach((page) => page.classList.add('hidden'))
+
   const currSection = document.querySelector(`.${innerText}`)
   currSection.classList.remove('hidden')
+
+  const currTitle = document.querySelector(`.page-title`)
+  currTitle.innerText = innerText
 }
 
 function onSetTextLine(textLine) {
-  const meme = getMeme()
-  const gCurrShape = meme.lines[meme.selectedLineIdx]
-
   setTextLine(textLine)
 
-  drawText(gCurrShape)
+  const elInputTextLine = document.querySelector(`.Text-line`)
+  elInputTextLine.value = `${textLine}`
+
+  renderMeme()
 }
 
-function onAddTextLine(textLine) {
+function onAddTextLine() {
+  addTextLine(textLine)
+
+  renderMeme()
+}
+
+function onDeleteLine() {
+  deleteLine()
+
+  renderMeme()
+}
+
+function onMoveLine() {
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
 
-  addTextLine(textLine)
+  meme.selectedLineIdx++
+  if (!meme.lines[meme.selectedLineIdx]) meme.selectedLineIdx = 0
 
-  drawText(gCurrShape)
+  const elInputTextLine = document.querySelector(`.Text-line`)
+  elInputTextLine.value = `${gCurrShape.text}`
+
+  renderMeme()
+}
+
+function onSelectImg(elImg, idImg) {
+  const meme = getMeme()
+  meme.selectedImgId = idImg
+
+  renderMeme()
+}
+
+function drawImg(elImg, idImg) {
+  // const elImg = new Image() // Create a new html img element
+  // elImg.src = 'img/04.jpg' // Send a network req to get that image, define the img src
+  // console.log('elImg:', elImg)
+  // // When the image ready draw it on the canvas
+  // elImg.onload = () => {
+  //     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+  // }
+
+  onSetSection('Meme-Editor')
+  gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+}
+
+function drawTextLine() {
+  const { lines } = getMeme()
+
+  lines.forEach((line, idx) => {
+    if (idx === null) return
+
+    if (line.offsetX && line.offsetY) {
+      drawText(line)
+      return
+    }
+
+    if (idx === 0) {
+      // LINE 1
+      line.offsetX = gElCanvas.width / 2
+      line.offsetY = 50
+    } else if (idx === 1) {
+      // LINE 2
+      line.offsetX = gElCanvas.width / 2
+      line.offsetY = gElCanvas.height - 50
+    } else {
+      line.offsetX = gElCanvas.width / 2
+      line.offsetY = gElCanvas.height / 2
+    }
+    drawText(line)
+  })
+}
+
+function drawText({
+  lineWidth,
+  font,
+  fontSize,
+  textAlign,
+  textBaseline,
+  offsetX,
+  offsetY,
+  strokeColor,
+  fillColor,
+  text,
+}) {
+  gCtx.lineWidth = lineWidth
+  gCtx.strokeStyle = strokeColor
+  gCtx.fillStyle = fillColor
+  gCtx.font = fontSize + 'px ' + font
+  gCtx.textAlign = textAlign
+  gCtx.textBaseline = textBaseline
+
+  gCtx.fillText(text, offsetX, offsetY) // Draws (fills) a given text at the given (x, y) position.
+  gCtx.strokeText(text, offsetX, offsetY) // Draws (strokes) a given text at the given (x, y) position.
+}
+
+function drawFrameSelected() {
+  const { selectedLineIdx } = getMeme()
+
+  if (selectedLineIdx === null) return
+
+  if (selectedLineIdx === 0) {
+    // IF IT'S LINE 1:
+    gCurrShape.offsetX = 10
+    gCurrShape.offsetY = 60
+    gCurrShape.dX = 470
+    gCurrShape.dY = 80
+  } else if (selectedLineIdx === 1) {
+    // IF IT'S LINE 2:
+    gCurrShape.offsetX = 10
+    gCurrShape.offsetY = 360
+    gCurrShape.dX = 470
+    gCurrShape.dY = 80
+  } else {
+    // IF IT'S LINE 3+:
+    gCurrShape.offsetX = 10
+    gCurrShape.offsetY = 210
+    gCurrShape.dX = 470
+    gCurrShape.dY = 80
+  }
+  drawRect(gCurrShape)
+}
+
+function drawRect({
+  lineWidth,
+  offsetX,
+  offsetY,
+  dX,
+  dY,
+  strokeColor,
+  fillColor,
+}) {
+  gCtx.lineWidth = lineWidth
+  gCtx.strokeStyle = strokeColor
+  gCtx.strokeRect(offsetX, offsetY, dX, dY)
+
+  // gCtx.fillStyle = fillColor
+  // gCtx.fillRect(offsetX, offsetY, dX, dY)
 }
 
 function setFontSize(fontSz) {
-  // const gCurrShape = getCurrShape()
-
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
 
@@ -109,8 +209,6 @@ function setFontSize(fontSz) {
 }
 
 function setFillColor(fillClr) {
-  // const gCurrShape = getCurrShape()
-
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
 
@@ -118,8 +216,6 @@ function setFillColor(fillClr) {
 }
 
 function setStrokeColor(strokeClr) {
-  // const gCurrShape = getCurrShape()
-
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
 
@@ -127,8 +223,6 @@ function setStrokeColor(strokeClr) {
 }
 
 function setShape(shp) {
-  // const gCurrShape = getCurrShape()
-
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
 
@@ -167,8 +261,6 @@ function addTouchListeners() {
 }
 
 function onDown(ev) {
-  // const gCurrShape = getCurrShape()
-
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
 
@@ -184,8 +276,6 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-  // const gCurrShape = getCurrShape()
-
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
 
@@ -206,8 +296,6 @@ function onMove(ev) {
 }
 
 function onUp() {
-  // const gCurrShape = getCurrShape()
-
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
 
@@ -216,8 +304,6 @@ function onUp() {
 }
 
 function getEvPos(ev) {
-  // const gCurrShape = getCurrShape()
-
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
 
@@ -258,23 +344,6 @@ function draw() {
   }
 }
 
-function drawRect({
-  lineWidth,
-  offsetX,
-  offsetY,
-  dX,
-  dY,
-  strokeColor,
-  fillColor,
-}) {
-  gCtx.lineWidth = lineWidth
-  gCtx.strokeStyle = strokeColor
-  gCtx.strokeRect(offsetX, offsetY, dX, dY)
-
-  // gCtx.fillStyle = fillColor
-  // gCtx.fillRect(offsetX, offsetY, dX, dY)
-}
-
 function drawArc({
   lineWidth,
   offsetX,
@@ -305,46 +374,18 @@ function drawPencil({ lineWidth, offsetX, offsetY, strokeColor, fillColor }) {
   gCtx.fill()
 }
 
-function drawText({
-  lineWidth,
-  font,
-  fontSize,
-  textAlign,
-  textBaseline,
-  offsetX,
-  offsetY,
-  strokeColor,
-  fillColor,
-  text,
-}) {
-  gCtx.lineWidth = lineWidth
-  gCtx.strokeStyle = strokeColor
-  gCtx.fillStyle = fillColor
-  gCtx.font = fontSize + 'px ' + font
-  gCtx.textAlign = textAlign
-  gCtx.textBaseline = textBaseline
-
-  gCtx.fillText(text, offsetX, offsetY) // Draws (fills) a given text at the given (x, y) position.
-  gCtx.strokeText(text, offsetX, offsetY) // Draws (strokes) a given text at the given (x, y) position.
-}
-
-function drawImg(elImg, idImg) {
-  // const elImg = new Image() // Create a new html img element
-  // elImg.src = 'img/04.jpg' // Send a network req to get that image, define the img src
-  // console.log('elImg:', elImg)
-  // // When the image ready draw it on the canvas
-  // elImg.onload = () => {
-  //     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-  // }
-
-  const meme = getMeme()
-  meme.selectedImgId = idImg
-
-  gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-  onSetSection('Meme-Editor')
-}
-
 function downloadImg(elLink) {
+  // CLEAR
+  clearCanvas()
+
+  // IMAGE
+  const { selectedImgId } = getMeme()
+  const elImg = document.querySelector(`.img${selectedImgId}`)
+  drawImg(elImg, selectedImgId)
+
+  // TEXTS
+  drawTextLine()
+
   const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
   elLink.href = imgContent
 }
