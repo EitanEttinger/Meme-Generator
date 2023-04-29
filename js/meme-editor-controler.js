@@ -103,9 +103,6 @@ function onAlignLine(AlignType) {
 function onSetFontSizeButton(deltaSize) {
   setFontSizeButton(deltaSize)
 
-  const elInput = document.querySelector(`.font-size`)
-  elInput.value = lines[selectedLineIdx].fontSize
-
   renderMeme()
 }
 

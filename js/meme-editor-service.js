@@ -188,7 +188,11 @@ function alignLine(AlignType) {
 
 function setFontSizeButton(deltaSize) {
   const { lines, selectedLineIdx } = getMeme()
+  lines[selectedLineIdx].fontSize = parseInt(lines[selectedLineIdx].fontSize)
   lines[selectedLineIdx].fontSize += deltaSize
+
+  const elInput = document.querySelector(`.font-size`)
+  elInput.value = lines[selectedLineIdx].fontSize
 
   _saveToStorage()
 }
