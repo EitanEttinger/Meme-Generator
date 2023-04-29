@@ -43,9 +43,8 @@
 
     <section class="container gallery-container page-container Gallery">
       <div class="search-panel">
-        <h2>"search-panel" To Be Continue...</h2>
-        <label for="search-box">Search:</label>
-        <input type="search" name="search-box" id="search-box" class="search-box" oninput="onSearch()">
+        <label for="search-box">Search Line:</label>
+        <input type="search" name="search-box" id="search-box" class="search-box" oninput="onSearchImg(this.value)">
         <!-- <img src="icons/search-icon.png" alt=""> -->
       </div>
 
@@ -158,6 +157,12 @@
           alt=""
           onclick="onSelectImg(this, 18)"
         />
+          <img
+          class="img19"
+          src="imgs/19.jpg"
+          alt=""
+          onclick="onSelectImg(this, 19)"
+        />
       </main>
     </section>
 
@@ -212,7 +217,7 @@
           name="font-size"
           id="font-size"
           class="font-size"
-          onchange="setFontSizeInput(this)"
+          onchange="onSetFontSizeInput(this)"
           value=50
           />
   
@@ -234,19 +239,26 @@
         
         <!-- ICONS -->
         <section class="panel icons-control-panel">
-          <button type="button" onclick="addTextLine()"><img src="icons/add.png" alt=""> add</button>
+          <button type="button" onclick="onAddTextLine()"><img src="icons/add.png" alt=""> add</button>
           <button type="button" onclick="onDeleteLine()"><img src="icons/trash.png" alt=""> trash</button>
           <button type="button" onclick="onMoveLine()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> pick line</button>
           <button type="button" onclick="onAlignLine('right')"><img src="icons/align-to-left.png" alt=""> align left</button>
           <button type="button" onclick="onAlignLine('center')"><img src="icons/center-text-alignment.png" alt=""> align center</button>
           <button type="button" onclick="onAlignLine('left')"><img src="icons/align-to-right.png" alt=""> align right</button>
-          <button type="button" onclick="setFontSizeButton(-5)"><img src="icons/decrease font - icon.png" alt=""> decrease</button>
-          <button type="button" onclick="setFontSizeButton(5)"><img src="icons/increase font - icon.png" alt=""> increase</button>
+          <button type="button" onclick="onSetFontSizeButton(-5)"><img src="icons/decrease font - icon.png" alt=""> decrease</button>
+          <button type="button" onclick="onSetFontSizeButton(5)"><img src="icons/increase font - icon.png" alt=""> increase</button>
           <button type="button" onclick="onPosLine('left')"><img src="icons/left-arrow.png" alt="">Text Left</button>
           <button type="button" onclick="onPosLine('up')"><img src="icons/up-arrow.png" alt="">Text Up</button>
           <button type="button" onclick="onPosLine('down')"><img src="icons/down-arrow.png" alt="">Text Down</button>
           <button type="button" onclick="onPosLine('right')"><img src="icons/right-arrow.png" alt="">Text Right</button>
           <button type="button" onclick="onStrokeLine()"><img src="icons/text stroke.png" alt="">stroke</button>
+
+          <!-- Emoji: -->
+          <!-- <button type="button" onclick="onAddEmoji()"><img src="icons/object-imags/sunglasses-summer.png" alt="">sunglasses</button>
+          <button type="button" onclick="onAddEmoji()"><img src="icons/object-imags/magician-hat.png" alt="">magician-hat</button>
+          <button type="button" onclick="onAddEmoji()"><img src="icons/object-imags/witch-hat.png" alt="">witch-hat</button>
+          <button type="button" onclick="onAddEmoji()"><img src="icons/object-imags/crossed-band-aids.png" alt="">crossed-band</button>
+          <button type="button" onclick="onAddEmoji()"><img src="icons/object-imags/sea-ball.png" alt="">sea-ball</button> -->
         </section>
         
         <section class="panel out-of-control-panel">
@@ -288,11 +300,11 @@
     </footer>
 
     <script src="js/services/util.service.js"></script>
-    <script src="js/upload-from-local.js"></script>
     <script src="js/sharing-on-facebook.js"></script>  
     <script src="js/gallery-controler.js"></script>
     <script src="js/gallery-service.js"></script>
     <script src="js/meme-editor-controler.js"></script>
     <script src="js/meme-editor-service.js"></script>
+    <script src="js/upload-from-local.js"></script>
   </body>
 </html>

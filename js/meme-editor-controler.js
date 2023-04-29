@@ -22,7 +22,9 @@ function init() {
   currSection.classList.add('hidden')
 }
 
-function onSearch() {}
+function onSearchImg(searchValue) {
+  searchImg(searchValue)
+}
 
 function renderMeme() {
   const meme = getMeme()
@@ -35,7 +37,12 @@ function renderMeme() {
 
   // IMAGE
   const { selectedImgId } = getMeme()
-  const elImg = document.querySelector(`.img${selectedImgId}`)
+  let elImg
+  if (meme.isUpload) {
+    elImg = meme.elUploadImg
+  } else {
+    elImg = document.querySelector(`.img${selectedImgId}`)
+  }
   drawImg(elImg, selectedImgId)
 
   // TEXTS
@@ -66,7 +73,7 @@ function onSetTextLine(textLine) {
   renderMeme()
 }
 
-function onAddTextLine() {
+function onAddTextLine(textLine) {
   addTextLine(textLine)
 
   renderMeme()
@@ -79,11 +86,7 @@ function onDeleteLine() {
 }
 
 function onMoveLine() {
-  const meme = getMeme()
-  const gCurrShape = meme.lines[meme.selectedLineIdx]
-
-  meme.selectedLineIdx++
-  if (!meme.lines[meme.selectedLineIdx]) meme.selectedLineIdx = 0
+  moveLine()
 
   const elInputTextLine = document.querySelector(`.Text-line`)
   elInputTextLine.value = `${gCurrShape.text}`
@@ -92,16 +95,13 @@ function onMoveLine() {
 }
 
 function onAlignLine(AlignType) {
-  const { lines, selectedLineIdx } = getMeme()
-
-  lines[selectedLineIdx].textAlign = AlignType
+  alignLine(AlignType)
 
   renderMeme()
 }
 
-function setFontSizeButton(deltaSize) {
-  const { lines, selectedLineIdx } = getMeme()
-  lines[selectedLineIdx].fontSize += deltaSize
+function onSetFontSizeButton(deltaSize) {
+  setFontSizeButton(deltaSize)
 
   const elInput = document.querySelector(`.font-size`)
   elInput.value = lines[selectedLineIdx].fontSize
@@ -109,62 +109,66 @@ function setFontSizeButton(deltaSize) {
   renderMeme()
 }
 
-function setFontSizeInput(fontSz) {
-  const { lines, selectedLineIdx } = getMeme()
-
-  lines[selectedLineIdx].fontSize = fontSz
+function onSetFontSizeInput(fontSz) {
+  setFontSizeInput(fontSz)
 
   renderMeme()
 }
 
 function onPosLine(directionPos) {
-  const { lines, selectedLineIdx } = getMeme()
-
-  switch (directionPos) {
-    case 'up':
-      lines[selectedLineIdx].offsetY -= 20
-      break
-    case 'down':
-      lines[selectedLineIdx].offsetY += 20
-      break
-    case 'right':
-      lines[selectedLineIdx].offsetX += 20
-      break
-    case 'left':
-      lines[selectedLineIdx].offsetX -= 20
-      break
-  }
+  posLine(directionPos)
 
   renderMeme()
 }
 
 function onStrokeLine() {
-  const { lines, selectedLineIdx } = getMeme()
-
-  lines[selectedLineIdx].isStroke = !lines[selectedLineIdx].isStroke
+  strokeLine()
 
   renderMeme()
 }
 
 function onSelectImg(elImg, idImg) {
-  const meme = getMeme()
-  meme.selectedImgId = idImg
+  clearCanvas()
+
+  selectImg(elImg, idImg)
+
+  renderMeme()
+}
+
+function onUploadImg(elImg) {
+  const elNewImg = uploadImg(elImg)
+
+  clearCanvas()
+
+  let elImgsContainer = document.querySelector(`.imgs-container`)
+  elImgsContainer.innerHtml += elNewImg
+
+  // `<img
+  // class="img${newImgId}"
+  // src="imgs/${newImgId}.jpg"
+  // alt=""
+  // onclick="onSelectImg(this, ${newImgId})"
+  // />`
 
   renderMeme()
 }
 
 function drawImg(elImg, idImg) {
-  // const elImg = new Image() // Create a new html img element
-  // elImg.src = 'img/04.jpg' // Send a network req to get that image, define the img src
-  // console.log('elImg:', elImg)
-  // // When the image ready draw it on the canvas
-  // elImg.onload = () => {
-  //     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-  // }
-
   onSetSection('Meme-Editor')
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
+
+// function drawUploadImg(elImg, idImg) {
+//   const elImg = new Image() // Create a new html img element
+//   elImg.src = `imgs/${idImg}.jpg` // Send a network req to get that image, define the img src
+//   console.log('elImg:', elImg)
+//   // When the image ready draw it on the canvas
+//   elImg.onload = () => {
+//     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+//   }
+
+//   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+// }
 
 function drawTextLine() {
   const { lines } = getMeme()

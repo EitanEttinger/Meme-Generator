@@ -5,7 +5,7 @@ const KEYWORD_SEARCH_STORAGE_KEY = 'KeywordSearchDB'
 const EDITOR_STORAGE_KEY = 'CurrMemeDB'
 const MEMES_STORAGE_KEY = 'MemesDB'
 
-let gCurrShape = {
+const gCurrShape = {
   shape: 'text',
   text: 'Enter Text Line',
   font: 'Impact',
@@ -25,12 +25,16 @@ let gCurrShape = {
   isStroke: true,
 }
 
-let gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
+const gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
 
-let gImgs = [
-  { id: 1, url: 'img/1.jpg', keywords: ['funny', 'cat'] },
-  { id: 2, url: 'img/2.jpg', keywords: ['funny', 'cat'] },
-  { id: 3, url: 'img/3.jpg', keywords: ['funny', 'baby'] },
+const gImgs = [
+  { id: 1, url: 'img/1.jpg', keywords: ['funny', 'trump'] },
+  { id: 2, url: 'img/2.jpg', keywords: ['funny', 'dog', 'puppy', 'puppies'] },
+  {
+    id: 3,
+    url: 'img/3.jpg',
+    keywords: ['funny', 'baby', 'dog', 'puppy', 'puppies'],
+  },
   { id: 4, url: 'img/4.jpg', keywords: ['funny', 'cat'] },
   { id: 5, url: 'img/5.jpg', keywords: ['funny', 'cat'] },
   { id: 6, url: 'img/6.jpg', keywords: ['funny', 'cat'] },
@@ -46,13 +50,16 @@ let gImgs = [
   { id: 16, url: 'img/16.jpg', keywords: ['funny', 'cat'] },
   { id: 17, url: 'img/17.jpg', keywords: ['funny', 'cat'] },
   { id: 18, url: 'img/18.jpg', keywords: ['funny', 'cat'] },
+  { id: 19, url: 'img/19.jpg', keywords: ['funny', 'hadar'] },
 ]
 
-let gMeme = {
-  selectedImgId: 3,
+const gMeme = {
+  selectedImgId: 5,
   selectedLineIdx: 0,
   canvasWidth: 0,
   canvasHeight: 0,
+  isUpload: false,
+  elUploadImg: '',
   lines: [
     {
       shape: 'text',
@@ -95,7 +102,7 @@ let gMeme = {
   ],
 }
 
-let gMemes = []
+const gMemes = []
 
 function getMeme() {
   return gMeme
@@ -109,7 +116,27 @@ function getMemes() {
   return gMemes
 }
 
-function setImg() {}
+function getImgs() {
+  return gImgs
+}
+
+function searchImg(searchValue) {
+  const imgs = getImgs()
+
+  imgs.forEach((img) => {
+    const elImg = document.querySelector(`.img${img.id}`)
+    elImg.classList.remove('hidden')
+  })
+
+  if (!searchValue) return
+
+  imgs.forEach((img) => {
+    if (!img.keywords.includes(searchValue.toLowerCase())) {
+      const elImg = document.querySelector(`.img${img.id}`)
+      elImg.classList.add('hidden')
+    }
+  })
+}
 
 function setTextLine(textLine) {
   const { lines, selectedLineIdx } = gMeme
@@ -123,9 +150,9 @@ function addTextLine() {
   const meme = gMeme
   const CurrLines = meme.lines
 
-  CurrLines.push(_createLine(''))
+  CurrLines.push(_createLine('Enter Text Line'))
 
-  meme.selectedLineIdx = CurrLines.length - 2
+  meme.selectedLineIdx = CurrLines.length - 1
 
   _saveToStorage()
 }
@@ -141,13 +168,106 @@ function deleteLine() {
   _saveToStorage()
 }
 
+function moveLine() {
+  const meme = getMeme()
+  const gCurrShape = meme.lines[meme.selectedLineIdx]
+
+  meme.selectedLineIdx++
+  if (!meme.lines[meme.selectedLineIdx]) meme.selectedLineIdx = 0
+
+  _saveToStorage()
+}
+
+function alignLine(AlignType) {
+  const { lines, selectedLineIdx } = getMeme()
+
+  lines[selectedLineIdx].textAlign = AlignType
+
+  _saveToStorage()
+}
+
+function setFontSizeButton(deltaSize) {
+  const { lines, selectedLineIdx } = getMeme()
+  lines[selectedLineIdx].fontSize += deltaSize
+
+  _saveToStorage()
+}
+
+function setFontSizeInput(fontSz) {
+  const { lines, selectedLineIdx } = getMeme()
+
+  lines[selectedLineIdx].fontSize = fontSz
+
+  _saveToStorage()
+}
+
+function posLine(directionPos) {
+  const { lines, selectedLineIdx } = getMeme()
+
+  switch (directionPos) {
+    case 'up':
+      lines[selectedLineIdx].offsetY -= 20
+      break
+    case 'down':
+      lines[selectedLineIdx].offsetY += 20
+      break
+    case 'right':
+      lines[selectedLineIdx].offsetX += 20
+      break
+    case 'left':
+      lines[selectedLineIdx].offsetX -= 20
+      break
+  }
+
+  _saveToStorage()
+}
+
+function strokeLine() {
+  const { lines, selectedLineIdx } = getMeme()
+
+  lines[selectedLineIdx].isStroke = !lines[selectedLineIdx].isStroke
+
+  _saveToStorage()
+}
+
+function selectImg(elImg, idImg) {
+  const meme = getMeme()
+  meme.isUpload = false
+  meme.selectedImgId = idImg
+
+  _saveToStorage()
+}
+
+function uploadImg(elImg) {
+  const newImgUpload = _createImg()
+  const meme = getMeme()
+  const imgs = getImgs()
+
+  meme.isUpload = true
+  imgs[imgs.length - 1].url = elImg.src
+
+  elImg.classList.add(`img${newImgUpload.id}`)
+  elImg.alt = ''
+  elImg.onClick = `onSelectImg(this, ${newImgUpload.id})`
+
+  meme.elUploadImg = elImg
+  meme.selectedImgId = newImgUpload.id
+
+  // _saveToStorage()
+
+  return elImg
+}
+
 function _createImg(keywords = ['funny']) {
   const imgs = gImgs
-  return {
+  const newImg = {
     id: imgs.length,
     url: `img/${imgs.length}.jpg`,
     keywords: keywords,
   }
+  imgs.push(newImg)
+
+  return newImg
 }
 
 function _createLine(textLine = 'Enter Text Line') {
@@ -178,6 +298,8 @@ function createMeme(imgIdx = 3) {
     selectedLineIdx: 0,
     canvasWidth: 0,
     canvasHeight: 0,
+    isUpload: false,
+    elUploadImg: '',
     lines: [
       {
         shape: 'text',
