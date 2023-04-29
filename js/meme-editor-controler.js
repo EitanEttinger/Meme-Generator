@@ -10,7 +10,7 @@ function init() {
   gCtx = gElCanvas.getContext('2d')
 
   resizeCanvas()
-  setCanvasSize()
+  onSetCanvasSize()
   addListeners()
 
   renderMeme()
@@ -133,6 +133,32 @@ function onSelectImg(elImg, idImg) {
   selectImg(elImg, idImg)
 
   renderMeme()
+}
+
+function onSetFillColor(fillClr) {
+  setFillColor(fillClr)
+
+  renderMeme()
+}
+
+function onSetStrokeColor(strokeClr) {
+  setStrokeColor(strokeClr)
+
+  renderMeme()
+}
+
+function onSetShape(shp) {
+  setShape(shp)
+
+  renderMeme()
+}
+
+function onSetCanvasSize() {
+  setCanvasSize()
+}
+
+function clearCanvas() {
+  gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
 function onUploadImg(elImg) {
@@ -267,41 +293,10 @@ function drawRect({
   // gCtx.fillRect(offsetX, offsetY, dX, dY)
 }
 
-function setFillColor(fillClr) {
-  const meme = getMeme()
-  const gCurrShape = meme.lines[meme.selectedLineIdx]
-
-  gCurrShape.fillColor = fillClr
-}
-
-function setStrokeColor(strokeClr) {
-  const meme = getMeme()
-  const gCurrShape = meme.lines[meme.selectedLineIdx]
-
-  gCurrShape.strokeColor = strokeClr
-}
-
-function setShape(shp) {
-  const meme = getMeme()
-  const gCurrShape = meme.lines[meme.selectedLineIdx]
-
-  gCurrShape.shape = shp
-}
-
-function clearCanvas() {
-  gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
-}
-
 function resizeCanvas() {
   const elContainer = document.querySelector('.canvas-container')
   gElCanvas.width = elContainer.offsetWidth
   gElCanvas.height = elContainer.offsetHeight
-}
-
-function setCanvasSize() {
-  const meme = getMeme()
-  meme.canvasWidth = gElCanvas.width
-  meme.canvasHeight = gElCanvas.height
 }
 
 function addListeners() {
@@ -340,6 +335,7 @@ function onDown(ev) {
   document.body.style.cursor = 'grabbing'
 }
 
+// NOT WORX NOW --------------------------------------------------------------------------------------------------------------------------------
 function onMove(ev) {
   const meme = getMeme()
   const gCurrShape = meme.lines[meme.selectedLineIdx]
@@ -356,8 +352,8 @@ function onMove(ev) {
   // Save the last pos , we remember where we`ve been and move accordingly
   gCurrShape.startPosX = offsetX
   gCurrShape.startPosY = offsetY
-
-  draw(ev)
+  // NOT WORX NOW --------------------------------------------------------------------------------------------------------------------------------
+  // draw(ev)
 }
 
 function onUp() {

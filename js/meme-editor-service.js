@@ -201,6 +201,35 @@ function setFontSizeInput(fontSz) {
   _saveToStorage()
 }
 
+function setFillColor(fillClr) {
+  const { lines, selectedLineIdx } = getMeme()
+  lines[selectedLineIdx].fillColor = fillClr
+
+  _saveToStorage()
+}
+
+function setStrokeColor(strokeClr) {
+  const { lines, selectedLineIdx } = getMeme()
+  lines[selectedLineIdx].strokeColor = strokeClr
+
+  _saveToStorage()
+}
+
+function setShape(shp) {
+  const { lines, selectedLineIdx } = getMeme()
+  lines[selectedLineIdx].shape = shp
+
+  _saveToStorage()
+}
+
+function setCanvasSize() {
+  const meme = getMeme()
+  meme.canvasWidth = gElCanvas.width
+  meme.canvasHeight = gElCanvas.height
+
+  _saveToStorage()
+}
+
 function posLine(directionPos) {
   const { lines, selectedLineIdx } = getMeme()
 
