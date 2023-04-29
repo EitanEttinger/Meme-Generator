@@ -440,8 +440,15 @@ function downloadImg(elLink) {
   clearCanvas()
 
   // IMAGE
+  const meme = getMeme()
   const { selectedImgId } = getMeme()
-  const elImg = document.querySelector(`.img${selectedImgId}`)
+
+  let elImg
+  if (meme.isUpload) {
+    elImg = meme.elUploadImg
+  } else {
+    elImg = document.querySelector(`.img${selectedImgId}`)
+  }
   drawImg(elImg, selectedImgId)
 
   // TEXTS
