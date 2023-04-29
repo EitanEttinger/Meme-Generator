@@ -50,8 +50,8 @@ button {
 }
 
 .control-panel .out-of-control-panel {
-  width: 44vw;
-  height: 10vh;
+  width: 33vw;
+  height: 25vh;
 
   display: grid;
   grid-template-columns: repeat(4, minmax(20px, 1fr));
@@ -75,7 +75,7 @@ button {
 }
 
 .container {
-  width: 95vw;
+  width: 70vw;
   margin-inline: auto;
 
   border: 5px solid #005792;
@@ -115,16 +115,8 @@ img {
   cursor: grab;
 }
 
-.memes-container {
-  height: 90vh;
-}
-
-.about-container {
-  height: 90vh;
-}
-
 .footer {
-  height: 40vh;
+  height: 20vh;
 
   margin-block-start: 20px;
 
@@ -132,8 +124,8 @@ img {
 }
 
 .footer .logo {
-  height: 20vh;
-  width: 33vw;
+  height: 7vh;
+  width: 15vw;
 
   margin-inline: auto;
 }

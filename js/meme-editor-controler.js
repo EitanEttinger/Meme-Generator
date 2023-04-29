@@ -91,8 +91,6 @@ function onMoveLine() {
   renderMeme()
 }
 
-// function setFontSize(x = 1) {}
-
 function onAlignLine(AlignType) {
   const { lines, selectedLineIdx } = getMeme()
 
@@ -115,6 +113,27 @@ function setFontSizeInput(fontSz) {
   const { lines, selectedLineIdx } = getMeme()
 
   lines[selectedLineIdx].fontSize = fontSz
+
+  renderMeme()
+}
+
+function onPosLine(directionPos) {
+  const { lines, selectedLineIdx } = getMeme()
+
+  switch (directionPos) {
+    case 'up':
+      lines[selectedLineIdx].offsetY -= 20
+      break
+    case 'down':
+      lines[selectedLineIdx].offsetY += 20
+      break
+    case 'right':
+      lines[selectedLineIdx].offsetX += 20
+      break
+    case 'left':
+      lines[selectedLineIdx].offsetX -= 20
+      break
+  }
 
   renderMeme()
 }
