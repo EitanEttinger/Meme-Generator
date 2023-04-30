@@ -166,13 +166,6 @@ function onUploadImg(elImg) {
   let elImgsContainer = document.querySelector(`.imgs-container`)
   elImgsContainer.innerHtml += elNewImg
 
-  // `<img
-  // class="img${newImgId}"
-  // src="imgs/${newImgId}.jpg"
-  // alt=""
-  // onclick="onSelectImg(this, ${newImgId})"
-  // />`
-
   renderMeme()
 }
 
@@ -181,20 +174,8 @@ function drawImg(elImg, idImg) {
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-// function drawUploadImg(elImg, idImg) {
-//   const elImg = new Image() // Create a new html img element
-//   elImg.src = `imgs/${idImg}.jpg` // Send a network req to get that image, define the img src
-//   console.log('elImg:', elImg)
-//   // When the image ready draw it on the canvas
-//   elImg.onload = () => {
-//     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-//   }
-
-//   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-// }
-
 function drawTextLine() {
-  const { lines } = getMeme()
+  const { lines, canvasWidth, canvasHeight } = getMeme()
 
   lines.forEach((line, idx) => {
     if (idx === null) return
@@ -206,15 +187,16 @@ function drawTextLine() {
 
     if (idx === 0) {
       // LINE 1
-      line.offsetX = gElCanvas.width / 2
-      line.offsetY = 50
+      line.offsetX = canvasWidth / 2
+      line.offsetY = 40
     } else if (idx === 1) {
       // LINE 2
-      line.offsetX = gElCanvas.width / 2
-      line.offsetY = gElCanvas.height - 50
+      line.offsetX = canvasWidth / 2
+      line.offsetY = canvasHeight - 40
     } else {
-      line.offsetX = gElCanvas.width / 2
-      line.offsetY = gElCanvas.height / 2
+      // LINE 3+
+      line.offsetX = canvasWidth / 2
+      line.offsetY = canvasHeight / 2
     }
     drawText(line)
   })
@@ -247,28 +229,28 @@ function drawText({
 }
 
 function drawFrameSelected() {
-  const { selectedLineIdx } = getMeme()
-
+  const { lines, selectedLineIdx, canvasWidth, canvasHeight } = getMeme()
+  const fontSize = lines[selectedLineIdx].fontSize
   if (selectedLineIdx === null) return
 
   if (selectedLineIdx === 0) {
     // IF IT'S LINE 1:
-    gCurrShape.offsetX = 10
-    gCurrShape.offsetY = 60
-    gCurrShape.dX = 470
-    gCurrShape.dY = 80
+    gCurrShape.offsetX = 5
+    gCurrShape.offsetY = fontSize / 2 / 2
+    gCurrShape.dX = canvasWidth - 10
+    gCurrShape.dY = fontSize + 10
   } else if (selectedLineIdx === 1) {
     // IF IT'S LINE 2:
-    gCurrShape.offsetX = 10
-    gCurrShape.offsetY = 360
-    gCurrShape.dX = 470
-    gCurrShape.dY = 80
+    gCurrShape.offsetX = 5
+    gCurrShape.offsetY = canvasHeight - fontSize - 20
+    gCurrShape.dX = canvasWidth - 10
+    gCurrShape.dY = fontSize + 10
   } else {
     // IF IT'S LINE 3+:
-    gCurrShape.offsetX = 10
-    gCurrShape.offsetY = 210
-    gCurrShape.dX = 470
-    gCurrShape.dY = 80
+    gCurrShape.offsetX = 5
+    gCurrShape.offsetY = canvasHeight / 2 - fontSize / 2 - 5
+    gCurrShape.dX = canvasWidth - 10
+    gCurrShape.dY = fontSize + 10
   }
   drawRect(gCurrShape)
 }
@@ -387,9 +369,6 @@ function draw() {
   const { shape } = gCurrShape
 
   switch (shape) {
-    case 'rect':
-      drawRect(gCurrShape)
-      break
     case 'arc':
       drawArc(gCurrShape)
       break

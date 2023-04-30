@@ -17,47 +17,61 @@ const gCurrShape = {
   strokeColor: '#000000',
   startPosX: 0,
   startPosY: 0,
-  offsetX: 200,
-  offsetY: 100,
+  offsetX: 250,
+  offsetY: 40,
   dX: 0,
   dY: 0,
   isDrag: false,
   isStroke: true,
 }
 
-const gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
+const gKeywordSearchCountMap = { funny: 25, man: 17, kid: 5 }
 
 const gImgs = [
-  { id: 1, url: 'img/1.jpg', keywords: ['funny', 'trump'] },
-  { id: 2, url: 'img/2.jpg', keywords: ['funny', 'dog', 'puppy', 'puppies'] },
+  { id: 1, url: 'img/1.jpg', keywords: ['funny', 'trump', 'man'] },
+  {
+    id: 2,
+    url: 'img/2.jpg',
+    keywords: ['funny', 'dog', 'puppy', 'puppies', 'animal'],
+  },
   {
     id: 3,
     url: 'img/3.jpg',
-    keywords: ['funny', 'baby', 'dog', 'puppy', 'puppies'],
+    keywords: ['funny', 'baby', 'dog', 'puppy', 'puppies', 'animal'],
   },
-  { id: 4, url: 'img/4.jpg', keywords: ['funny', 'cat'] },
-  { id: 5, url: 'img/5.jpg', keywords: ['funny', 'cat'] },
-  { id: 6, url: 'img/6.jpg', keywords: ['funny', 'cat'] },
-  { id: 7, url: 'img/7.jpg', keywords: ['funny', 'baby'] },
-  { id: 8, url: 'img/8.jpg', keywords: ['funny', 'cat'] },
-  { id: 9, url: 'img/9.jpg', keywords: ['funny', 'cat'] },
-  { id: 10, url: 'img/10.jpg', keywords: ['funny', 'cat'] },
-  { id: 11, url: 'img/11.jpg', keywords: ['funny', 'baby'] },
-  { id: 12, url: 'img/12.jpg', keywords: ['funny', 'cat'] },
-  { id: 13, url: 'img/13.jpg', keywords: ['funny', 'cat'] },
-  { id: 14, url: 'img/14.jpg', keywords: ['funny', 'cat'] },
-  { id: 15, url: 'img/15.jpg', keywords: ['funny', 'cat'] },
-  { id: 16, url: 'img/16.jpg', keywords: ['funny', 'cat'] },
-  { id: 17, url: 'img/17.jpg', keywords: ['funny', 'cat'] },
-  { id: 18, url: 'img/18.jpg', keywords: ['funny', 'cat'] },
-  { id: 19, url: 'img/19.jpg', keywords: ['funny', 'hadar'] },
+  {
+    id: 4,
+    url: 'img/4.jpg',
+    keywords: ['funny', 'cat', 'animal', 'computer', 'sleep'],
+  },
+  { id: 5, url: 'img/5.jpg', keywords: ['funny', 'baby', 'kid', 'win'] },
+  { id: 6, url: 'img/6.jpg', keywords: ['funny', 'man'] },
+  { id: 7, url: 'img/7.jpg', keywords: ['funny', 'baby', 'kid'] },
+  { id: 8, url: 'img/8.jpg', keywords: ['funny', 'man'] },
+  { id: 9, url: 'img/9.jpg', keywords: ['funny', 'baby', 'kid'] },
+  { id: 10, url: 'img/10.jpg', keywords: ['funny', 'man'] },
+  { id: 11, url: 'img/11.jpg', keywords: ['funny', 'man', 'men', 'kiss'] },
+  { id: 12, url: 'img/12.jpg', keywords: ['funny', 'man'] },
+  { id: 13, url: 'img/13.jpg', keywords: ['funny', 'man'] },
+  { id: 14, url: 'img/14.jpg', keywords: ['funny', 'man'] },
+  { id: 15, url: 'img/15.jpg', keywords: ['funny', 'man'] },
+  { id: 16, url: 'img/16.jpg', keywords: ['funny', 'man'] },
+  { id: 17, url: 'img/17.jpg', keywords: ['funny', 'man'] },
+  { id: 18, url: 'img/18.jpg', keywords: ['funny', 'baby', 'kid'] },
+  { id: 19, url: 'img/19.jpg', keywords: ['funny', 'hadar', 'kid', 'cool'] },
+  { id: 20, url: 'img/20.jpg', keywords: ['funny', 'man', 'men', 'what'] },
+  { id: 21, url: 'img/21.jpg', keywords: ['funny', 'woman', 'beautiful'] },
+  { id: 22, url: 'img/22.jpg', keywords: ['funny', 'man'] },
+  { id: 23, url: 'img/23.jpg', keywords: ['funny', 'man'] },
+  { id: 24, url: 'img/24.jpg', keywords: ['funny', 'man', 'men'] },
+  { id: 25, url: 'img/25.jpg', keywords: ['funny', 'man', 'men', 'woman'] },
 ]
 
 const gMeme = {
   selectedImgId: 5,
   selectedLineIdx: 0,
-  canvasWidth: 0,
-  canvasHeight: 0,
+  canvasWidth: 500,
+  canvasHeight: 500,
   isUpload: false,
   elUploadImg: '',
   lines: [
@@ -73,8 +87,8 @@ const gMeme = {
       strokeColor: '#000000',
       startPosX: 0,
       startPosY: 0,
-      offsetX: 200,
-      offsetY: 100,
+      offsetX: 250,
+      offsetY: 40,
       dX: 0,
       dY: 0,
       isDrag: false,
@@ -92,8 +106,27 @@ const gMeme = {
       strokeColor: '#000000',
       startPosX: 0,
       startPosY: 0,
-      offsetX: 200,
-      offsetY: 400,
+      offsetX: 250,
+      offsetY: 470,
+      dX: 0,
+      dY: 0,
+      isDrag: false,
+      isStroke: true,
+    },
+    {
+      shape: 'text',
+      text: 'Enter Text Line',
+      font: 'Impact',
+      fontSize: 50,
+      textAlign: 'center',
+      textBaseline: 'middle',
+      lineWidth: 3,
+      fillColor: '#ffffff',
+      strokeColor: '#000000',
+      startPosX: 0,
+      startPosY: 0,
+      offsetX: 250,
+      offsetY: 255,
       dX: 0,
       dY: 0,
       isDrag: false,
@@ -179,9 +212,24 @@ function moveLine() {
 }
 
 function alignLine(AlignType) {
-  const { lines, selectedLineIdx } = getMeme()
+  const { lines, selectedLineIdx, canvasWidth } = getMeme()
 
   lines[selectedLineIdx].textAlign = AlignType
+
+  switch (AlignType) {
+    case 'start':
+      lines[selectedLineIdx].offsetX = 10
+      break
+
+    case 'center':
+      const centerCanvas = canvasWidth / 2
+      lines[selectedLineIdx].offsetX = centerCanvas
+      break
+
+    case 'end':
+      lines[selectedLineIdx].offsetX = canvasWidth - 10
+      break
+  }
 
   _saveToStorage()
 }
@@ -329,8 +377,8 @@ function createMeme(imgIdx = 3) {
   return {
     selectedImgId: imgIdx,
     selectedLineIdx: 0,
-    canvasWidth: 0,
-    canvasHeight: 0,
+    canvasWidth: 500,
+    canvasHeight: 500,
     isUpload: false,
     elUploadImg: '',
     lines: [
@@ -346,8 +394,8 @@ function createMeme(imgIdx = 3) {
         strokeColor: '#000000',
         startPosX: 0,
         startPosY: 0,
-        offsetX: 200,
-        offsetY: 100,
+        offsetX: 250,
+        offsetY: 40,
         dX: 0,
         dY: 0,
         isDrag: false,
@@ -365,8 +413,8 @@ function createMeme(imgIdx = 3) {
         strokeColor: '#000000',
         startPosX: 0,
         startPosY: 0,
-        offsetX: 200,
-        offsetY: 400,
+        offsetX: 250,
+        offsetY: 460,
         dX: 0,
         dY: 0,
         isDrag: false,
